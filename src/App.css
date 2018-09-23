@@ -1,0 +1,46 @@
+body {
+    background: #333
+}
+
+.App {
+/*  text-align: center; */
+  margin: 100px 200px 200px 200px;
+}
+
+.slider-wrapper {
+  width: 800px;
+  margin: 30px 0px 30px 0px;
+}
+
+.smallknob {
+  float: left;
+}
+
+.smallknob-body {
+  margin: 30px 10px 0px 10px;
+}
+
+.smallknob-label {
+  color: #2EF;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.panel {
+  float: left;
+  margin-right: 30px;
+  color: #2EF;
+  text-align: center;
+}
+
+.padding {
+  width: 130px;
+}
+
+a:link { color: #2EF; }
+a:visited { color: #2EF; }
+a:hover { color: #2EF; }
+a:active { color: #2EF; }
+

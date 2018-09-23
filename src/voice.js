@@ -88,8 +88,9 @@ class Voice
         this.gain.connect(vowelFilter.F1);
         this.gain.connect(vowelFilter.F2);
         this.level = 0.5;
-        this.eg_t=[0, 0.01, 0.1];
-        this.eg_a=[0, 1,      1];
+        this.eg_t=[0, 0.01];
+        this.eg_a=[0, 1   ];
+        this.release = 0.01;
         break;
       case "h":
         this.osc = lpf_noise;
@@ -199,12 +200,13 @@ class Voice
       this.init = true;
     }
     var t0 = this.ctx.currentTime;
-    this.gain.gain.setValueAtTime(0.0000001, this.ctx.currentTime);
-    for (let i = 0; i < this.eg_t.length - 1; i++) {
+    //this.gain.gain.setValueAtTime(0.0000001, this.ctx.currentTime);
+    this.gain.gain.setTargetAtTime(this.eg_a[0] * this.level, t0, this.eg_t[0]);
+    for (let i = 1; i < this.eg_t.length; i++) {
       this.gain.gain.setTargetAtTime(
-        this.eg_a[i + 1] * this.level,
+        this.eg_a[i] * this.level,
         t0 + this.eg_t[i],
-        (this.eg_t[i + 1] - this.eg_t[i]) / 10);
+        (this.eg_t[i] - this.eg_t[i - 1]));
     }
   }
 
@@ -217,13 +219,14 @@ class Voice
   stop_eg()
   {
     var t0 = this.ctx.currentTime;
-    this.gain.gain.setValueAtTime(this.level, this.ctx.currentTime);
-    for (let i = 0; i < this.eg_t.length - 1; i++) {
-      this.gain.gain.setTargetAtTime(
-        this.eg_a[i + 1] * this.level + 0.0000001,
-        t0 + this.eg_t[i],
-        (this.eg_t[i + 1] - this.eg_t[i]) / 10);
-    }    
+    if (this.release == null) {
+      this.gain.gain.setValueAtTime(0.0000001, t0);
+    }
+    this.gain.gain.setValueAtTime(this.gain.gain.value, t0);
+    this.gain.gain.setTargetAtTime(
+      0.0000001,
+      t0 + this.release,
+      this.release);
   }
 }
 

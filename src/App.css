@@ -1,5 +1,6 @@
 body {
-    background: #333
+  background: #333;
+  color: #2EF;
 }
 
 .App {
@@ -8,6 +9,7 @@ body {
 }
 
 .slider-wrapper {
+  font-size: 13px;
   width: 800px;
   margin: 30px 0px 30px 0px;
 }
@@ -21,7 +23,6 @@ body {
 }
 
 .smallknob-label {
-  color: #2EF;
   margin-top: -10px;
   margin-bottom: 20px;
   text-align: center;

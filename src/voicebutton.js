@@ -59,13 +59,13 @@ class VoicePad
 
 	play() {
 		this.playing = true;
-		this.voice.play();
-		//this.voice.play_eg();
+		//this.voice.play();
+		this.voice.play_eg();
 	}
 
 	stop() {
 		this.playing = false;
-		this.voice.stop();
+		this.voice.stop_eg();
 	}
 
 	isDown() {

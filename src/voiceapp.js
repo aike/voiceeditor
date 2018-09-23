@@ -23,6 +23,11 @@ class VoiceApp {
 	this.conso["t" ] = new Ptype_VoiceButton("t" , new Voice(this.audioContext, "t" ,  vf, noise, fnoise, this.out));
 	this.conso["k" ] = new Ptype_VoiceButton("k" , new Voice(this.audioContext, "k" ,  vf, noise, fnoise, this.out));
 	this.conso["p" ] = new Ptype_VoiceButton("p" , new Voice(this.audioContext, "p" ,  vf, noise, fnoise, this.out));
+
+	for (var c in this.conso) {
+		this.vowel.addConso(this.conso[c]);
+		this.conso[c].addVowel(this.vowel);
+	}
   }
 
   setVowelParam(param) {

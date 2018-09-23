@@ -12,7 +12,6 @@ class WaveCanvas extends React.Component {
     this.voice = null;
     this.rec = null;
     this.state = {
-      voice: null,
       startpos: 0,
       endpos: 100
     }
@@ -56,18 +55,32 @@ class WaveCanvas extends React.Component {
   play() {
     const vp = this.props.value.vowel_param;
     this.voice.vowel.voice.level = vp.level / 100.0;
+    this.voice.vowel.voice.eg_t[1] = vp.attack / 1000.0;
+    this.voice.vowel.voice.release = vp.release / 1000.0;
+
+    const cp = this.props.value.conso_param;
+    const c = this.props.value.conso_type;
+    this.voice.conso[c].voice.level = cp.level / 100.0;
 
     this.rec.clear();
     this.rec.record();
-    this.voice.vowel.downFreq(vp.f1, vp.f2);
-    //osc.start(0);
+    setTimeout(() => {
+      this.voice.conso[c].down();
+    }, 1000 * this.props.value.conso_start);
+    setTimeout(() => {
+      this.voice.vowel.downFreq(vp.f1, vp.f2);
+    }, 1000 * this.props.value.vowel_start);
+    setTimeout(() => {
+      this.voice.conso[c].up();
+    }, 1000 * this.props.value.conso_end);
     setTimeout(() => {
       this.voice.vowel.up();
-      //osc.stop();
+    }, 1000 * this.props.value.vowel_end);
+    setTimeout(() => {
       this.rec.stop();
       this.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
       this.rec.exportWAV(this.createDownloadLink);
-    }, 1000)
+    }, 1000);
   }
 
   drawWave(buf, startpos, endpos) {
@@ -87,7 +100,7 @@ class WaveCanvas extends React.Component {
     for (var i = 0; i < len; i++) {
         var idx = zoomstart + i;
         var x = (i / len) * canvas.width;
-        var y = (1 - ch[idx] * 1.5) * canvas.height - canvas.height / 2;
+        var y = (1 - ch[idx] * 2.0) * canvas.height - canvas.height / 2;
         if (i === 0) {
             canvasContext.moveTo(x, y);
         } else {

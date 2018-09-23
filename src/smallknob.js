@@ -25,7 +25,7 @@ class SmallKnob extends React.Component {
     return (
       <div className="smallknob">
 	      <Knob
-	        value={this.state.value}
+	        value={this.props.value}
           max={this.state.max}
 	        onChange={this.handleChange}
 	        width={this.state.width}

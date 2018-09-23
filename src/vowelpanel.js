@@ -2,14 +2,7 @@ import React from 'react';
 import SmallKnob from './smallknob.js';
 
 class VowelPanel extends React.Component {
-  state = {
-    level: 50,
-    attack: 10,
-    release: 10,
-    f1: 50,
-    f2: 50,
-    apitch: 0
-  };
+  state = this.props.value;
 
   handleChange = (key, newValue) => {
     switch (key) {

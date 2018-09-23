@@ -10,7 +10,9 @@ class WaveCanvas extends React.Component {
   	this.play = this.play.bind(this);
 
     this.state = {
-      rec: null
+      rec: null,
+      startpos: 0,
+      endpos: 100
     }
   }
 
@@ -66,7 +68,7 @@ class WaveCanvas extends React.Component {
     setTimeout(() => {
       osc.stop();
       this.state.rec.stop();
-      this.state.rec.getBuffer((buf)=>{ this.drawWave(buf, 0, 100); });
+      this.state.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
       this.state.rec.exportWAV(this.createDownloadLink);
     }, 100)
   }
@@ -118,8 +120,10 @@ class WaveCanvas extends React.Component {
   }
 
   setZoom(val) {
+    this.state.startpos = val[0];
+    this.state.endpos = val[1];
     if (this.state.rec) {
-      this.state.rec.getBuffer((buf)=>{ this.drawWave(buf, val[0], val[1]); });
+      this.state.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
     }
   }
 

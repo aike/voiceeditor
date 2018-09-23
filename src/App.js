@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import ConsoPanel from './consopanel.js';
-import VowelPanel from './vowelpanel.js';
-import WaveCanvas from './wavecanvas.js';
+import ConsoPanel from './consopanel';
+import VowelPanel from './vowelpanel';
+import WaveCanvas from './wavecanvas';
 
 
 const TipRange = Slider.createSliderWithTooltip(Slider.Range);
@@ -26,6 +26,9 @@ class App extends Component {
     this.setState({value: newValue});
   };
 
+  handleChangeVowel = (newValue) => {
+    this.setState({vowel_param: newValue});
+  };
 
   render() {
     return (
@@ -46,11 +49,11 @@ class App extends Component {
           <TipRange defaultValue={[this.state.vowel_start, this.state.vowel_end]}/>
         </div>
         <div>
-          <WaveCanvas />
+          <WaveCanvas value={this.state} />
         </div>
         <div>
           <ConsoPanel value={this.state.conso_param}/>
-          <VowelPanel value={this.state.vowel_param}/>
+          <VowelPanel value={this.state.vowel_param} onChange={this.handleChangeVowel} />
         </div>
       </div>
     );

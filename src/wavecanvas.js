@@ -54,9 +54,12 @@ class WaveCanvas extends React.Component {
   }
 
   play() {
+    const vp = this.props.value.vowel_param;
+    this.voice.vowel.voice.level = vp.level / 100.0;
+
     this.rec.clear();
     this.rec.record();
-    this.voice.vowel.down(0.5, 0.5);
+    this.voice.vowel.downFreq(vp.f1, vp.f2);
     //osc.start(0);
     setTimeout(() => {
       this.voice.vowel.up();
@@ -64,7 +67,7 @@ class WaveCanvas extends React.Component {
       this.rec.stop();
       this.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
       this.rec.exportWAV(this.createDownloadLink);
-    }, 100)
+    }, 1000)
   }
 
   drawWave(buf, startpos, endpos) {

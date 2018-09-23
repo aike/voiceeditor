@@ -4,6 +4,7 @@ import React from 'react';
 class SmallKnob extends React.Component {
   state = {
   	value: this.props.value,
+    max: this.props.max,
   	width:60,
   	height:60,
   	angleArc: 270,
@@ -15,6 +16,9 @@ class SmallKnob extends React.Component {
 
   handleChange = (newValue) => {
     this.setState({value: newValue});
+    if (this.props.onChange) {
+      this.props.onChange(newValue);
+    }
   };
 
   render() {
@@ -22,6 +26,7 @@ class SmallKnob extends React.Component {
       <div className="smallknob">
 	      <Knob
 	        value={this.state.value}
+          max={this.state.max}
 	        onChange={this.handleChange}
 	        width={this.state.width}
 	        height={this.state.height}

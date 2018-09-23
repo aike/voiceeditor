@@ -24,6 +24,10 @@ class VoiceApp {
 	this.conso["k" ] = new Ptype_VoiceButton("k" , new Voice(this.audioContext, "k" ,  vf, noise, fnoise, this.out));
 	this.conso["p" ] = new Ptype_VoiceButton("p" , new Voice(this.audioContext, "p" ,  vf, noise, fnoise, this.out));
   }
+
+  setVowelParam(param) {
+  	this.vowel.voice.level = param.level / 100.0;
+  }
 }
 
 export default VoiceApp;

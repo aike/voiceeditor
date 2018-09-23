@@ -1,16 +1,18 @@
 import React from 'react';
-import Recorder from './recorder.js';
+import Recorder from './recorder';
 import Slider from 'rc-slider';
+import VoiceApp from './voiceapp';
 
 class WaveCanvas extends React.Component {
   constructor() {
     super();
 
   	window.AudioContext = window.webkitAudioContext || window.AudioContext;
-  	this.play = this.play.bind(this);
 
+    this.voice = null;
+    this.rec = null;
     this.state = {
-      rec: null,
+      voice: null,
       startpos: 0,
       endpos: 100
     }
@@ -18,6 +20,8 @@ class WaveCanvas extends React.Component {
 
   componentDidMount() {
     this.clear();
+    this.voice = new VoiceApp();
+    this.rec = new Recorder(this.voice.out, {numChannels:1});
   }
 
   clear() {
@@ -28,7 +32,6 @@ class WaveCanvas extends React.Component {
     canvasContext.fillStyle = 'rgb(20, 20, 60)';
     canvasContext.fillRect(0, 0, canvas.width, canvas.height);
     // grid
-
     canvasContext.strokeStyle = 'rgb(60, 60, 80)';
     for (var y = 0; y < 10; y++) {
       canvasContext.beginPath();
@@ -51,25 +54,16 @@ class WaveCanvas extends React.Component {
   }
 
   play() {
-    let audioctx = new AudioContext();
-    var osc = audioctx.createOscillator();
-    osc.type = "sawtooth";
-    osc.frequency.value = 110;
-    var gain = audioctx.createGain();
-    gain.gain.value = 0.2;
-    osc.connect(gain);
-    gain.connect(audioctx.destination);
-
-    this.state.rec = new Recorder(gain, {numChannels:1})
-
-    this.state.rec.clear();
-    this.state.rec.record();
-    osc.start(0);
+    this.rec.clear();
+    this.rec.record();
+    this.voice.vowel.down(0.5, 0.5);
+    //osc.start(0);
     setTimeout(() => {
-      osc.stop();
-      this.state.rec.stop();
-      this.state.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
-      this.state.rec.exportWAV(this.createDownloadLink);
+      this.voice.vowel.up();
+      //osc.stop();
+      this.rec.stop();
+      this.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
+      this.rec.exportWAV(this.createDownloadLink);
     }, 100)
   }
 
@@ -83,10 +77,9 @@ class WaveCanvas extends React.Component {
 	  // draw
 	  canvasContext.strokeStyle = 'rgb(255, 255, 255)';
     canvasContext.beginPath();
-    var wavstart = 0;
-    var wavend = ch.length;
-    var zoomstart = Math.floor(wavend * startpos / 100);
-    var zoomend = Math.floor(wavend * endpos / 100);
+    var wavlength = ch.length;
+    var zoomstart = Math.floor(wavlength * startpos / 100);
+    var zoomend = Math.floor(wavlength * endpos / 100);
     var len = zoomend - zoomstart;
     for (var i = 0; i < len; i++) {
         var idx = zoomstart + i;
@@ -120,10 +113,12 @@ class WaveCanvas extends React.Component {
   }
 
   setZoom(val) {
-    this.state.startpos = val[0];
-    this.state.endpos = val[1];
-    if (this.state.rec) {
-      this.state.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
+    this.setState({
+      startpos: val[0],
+      endpos: val[1]
+    });
+    if (this.rec) {
+      this.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
     }
   }
 
@@ -143,7 +138,7 @@ class WaveCanvas extends React.Component {
   	        }}></canvas>
   	      <div style={{float:'left'}}>
   		      <button
-  		        onClick={this.play}
+  		        onClick={() => { this.play(); }}
   		        style={{
   		        	width:'100px',
   		        	height:'30px',

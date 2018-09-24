@@ -6,13 +6,13 @@ body {
 
 .App {
 /*  text-align: center; */
-  margin: 50px 200px 200px 100px;
+  margin: 20px 100px 200px 100px;
 }
 
 .slider-wrapper {
-  font-size: 13px;
+  font-size: 11px;
   width: 800px;
-  margin: 30px 0px 30px 0px;
+  margin: 16px 0px 10px 0px;
 }
 
 .smallknob {
@@ -27,7 +27,7 @@ body {
   margin-top: -10px;
   margin-bottom: 20px;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .panel {
@@ -35,11 +35,12 @@ body {
   margin-right: 30px;
   color: #2EF;
   text-align: center;
+  font-size: 12px;
 }
 
 .panelarea {
   position: absolute;
-  top: 750px;
+  top: 580px;
   left: 70px;
 }
 

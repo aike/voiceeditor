@@ -169,7 +169,7 @@ class WaveCanvas extends React.Component {
             height="400"
             style={{
               position: 'absolute',
-              top: '300px',
+              top: '170px',
               left: '100px',
               backgroundColor:'rgb(120, 20, 60)',
               zIndex: '0'
@@ -180,7 +180,7 @@ class WaveCanvas extends React.Component {
   	        height="400"
   	        style={{
               position: 'absolute',
-              top: '300px',
+              top: '170px',
               left: '100px',
               zIndex: '1'
   	        }}></canvas>
@@ -189,7 +189,7 @@ class WaveCanvas extends React.Component {
   		        onClick={() => { this.play(); }}
   		        style={{
                 position: 'absolute',
-                top: '300px',
+                top: '170px',
                 left: '920px',
   		        	width:'100px',
   		        	height:'30px',
@@ -197,14 +197,14 @@ class WaveCanvas extends React.Component {
   		      <div id="wavlink"
   		        style={{
                 position: 'absolute',
-                top: '350px',
+                top: '220px',
                 left: '920px',
   		        }} 
                 />
             <div
               style={{
                 position: 'absolute',
-                top: '450px',
+                top: '320px',
                 left: '960px',
                 width: '30px',
                 height: '200px'
@@ -224,7 +224,7 @@ class WaveCanvas extends React.Component {
         <div
           style={{
             position: 'absolute',
-            top: '700px',
+            top: '570px',
             left: '100px',
             width:'800px'
         }}>

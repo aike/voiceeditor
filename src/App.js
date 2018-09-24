@@ -79,7 +79,14 @@ class App extends Component {
 
     return (
       <div className="App">
-        <select name="conso" onChange={(e)=>{this.handleChangeConsoType(e);}} style={{width:100, height:30, fontSize:'20px', marginBottom:'20px'}}>
+        <select name="conso"
+          onChange={(e)=>{this.handleChangeConsoType(e);}}
+          style={{
+            width:100,
+            height:22,
+            fontSize:'16px',
+            marginBottom:'0px'
+          }}>
           <option value="h">h</option>
           <option value="s">s</option>
           <option value="sy">sy</option>

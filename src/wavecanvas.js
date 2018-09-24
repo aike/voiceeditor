@@ -13,7 +13,8 @@ class WaveCanvas extends React.Component {
     this.rec = null;
     this.state = {
       startpos: 0,
-      endpos: 100
+      endpos: 100,
+      boost: 1.5
     }
   }
 
@@ -72,9 +73,6 @@ class WaveCanvas extends React.Component {
     const c = this.props.value.conso_type;
     this.voice.conso[c].voice.level = cp.level / 100.0;
 
-    console.log(this.props.value.conso_start + ' ' + this.props.value.vowel_start
-      + ' ' +   this.props.value.conso_end   + ' ' + this.props.value.vowel_end);
-
     this.rec.clear();
     this.rec.record();
     setTimeout(() => {
@@ -114,7 +112,7 @@ class WaveCanvas extends React.Component {
     for (var i = 0; i < len; i++) {
         var idx = zoomstart + i;
         var x = (i / len) * canvas.width;
-        var y = (1 - ch[idx] * 1.5) * canvas.height - canvas.height / 2;
+        var y = (1 - ch[idx] * this.state.boost) * canvas.height - canvas.height / 2;
         if (i === 0) {
             canvasContext.moveTo(x, y);
         } else {
@@ -142,10 +140,19 @@ class WaveCanvas extends React.Component {
   	}
   }
 
-  setZoom(val) {
+  setTimeZoom(val) {
     this.setState({
       startpos: val[0],
       endpos: val[1]
+    });
+    if (this.rec) {
+      this.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
+    }
+  }
+
+  setLevelZoom(val) {
+    this.setState({
+      boost: val
     });
     if (this.rec) {
       this.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
@@ -161,36 +168,71 @@ class WaveCanvas extends React.Component {
             width="800"
             height="400"
             style={{
+              position: 'absolute',
+              top: '300px',
+              left: '100px',
               backgroundColor:'rgb(120, 20, 60)',
-              margin: '30px 10px 0px 0px',
-              float:'left'
+              zIndex: '0'
             }}></canvas>
   	      <canvas
   	        id="wavecanvas"
   	        width="800"
   	        height="400"
   	        style={{
-  	        	backgroundColor:'rgb(20, 20, 60)',
-  	        	margin: '30px 10px 0px 0px',
-  	        	float:'left'
+              position: 'absolute',
+              top: '300px',
+              left: '100px',
+              zIndex: '1'
   	        }}></canvas>
   	      <div style={{float:'left'}}>
   		      <button
   		        onClick={() => { this.play(); }}
   		        style={{
+                position: 'absolute',
+                top: '300px',
+                left: '920px',
   		        	width:'100px',
   		        	height:'30px',
-  		        	margin:'30px 20px 20px 20px'
   		        }}>Play</button>
   		      <div id="wavlink"
   		        style={{
-  		        	margin:'10px 20px'
+                position: 'absolute',
+                top: '350px',
+                left: '920px',
   		        }} 
                 />
+            <div
+              style={{
+                position: 'absolute',
+                top: '450px',
+                left: '960px',
+                width: '30px',
+                height: '200px'
+              }} 
+            >
+              <Slider
+                vertical={true}
+                defaultValue={1}
+                step={0.1}
+                min={0.1}
+                max={10}
+                onChange={(value) => {this.setLevelZoom(value);}}
+              />
+            </div>
   		    </div>
         </div>
-        <div style={{clear:'both', width:'800px'}}>
-          <Slider.Range defaultValue={[0, 100]} allowCross={false} onChange={(value) => {this.setZoom(value);}} />
+        <div
+          style={{
+            position: 'absolute',
+            top: '700px',
+            left: '100px',
+            width:'800px'
+        }}>
+          <Slider.Range
+            defaultValue={[0, 100]}
+            allowCross={false}
+            onChange={(value) => {this.setTimeZoom(value);}}
+          />
         </div>
       </div>
     );

@@ -111,7 +111,7 @@ class App extends Component {
         <div>
           <WaveCanvas value={this.state} />
         </div>
-        <div>
+        <div className="panelarea">
           <ConsoPanel value={this.state.conso_param} onChange={(val)=>{this.handleChangeConsoValue(val);}} />
           <VowelPanel value={this.state.vowel_param} onChange={(val)=>{this.handleChangeVowel(val);}} />
         </div>

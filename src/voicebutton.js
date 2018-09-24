@@ -117,7 +117,7 @@ class VoiceButton
 
 	stop() {
 		this.playing = false;
-		this.voice.stop();
+		this.voice.stop_eg();
 	}
 
 	isDown() {
@@ -190,8 +190,8 @@ class Stype_VoiceButton extends VoiceButton
 {
 	constructor(s, voice) {
 		super(s, voice);
-		this.consotime = 150;
-		this.overwraptime = 0;
+		this.consotime = 200;
+		this.overwraptime = 60;
 	}
 
 	down() {
@@ -204,36 +204,41 @@ class Stype_VoiceButton extends VoiceButton
 	}
 
 	up() {
+		if (Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
+			return;
+		}
 		this.downing = false;
-		this.stop();
 		if (this.vowel.isDown()) {
 			this.vowel.play();
 		}
+		setTimeout(()=>{
+			this.stop();
+		}, this.overwraptime);
 	}
 
 	onVowelDown() {
 		if (Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
 			setTimeout(()=> {
-				this.stop();
+				setTimeout(()=>{
+					this.stop();
+				}, this.overwraptime);
 				this.vowel.play();
 			}, this.consotime);
-		} else {
-			setTimeout(()=>{
-				this.stop();
-			}, this.overwraptime);
-			this.vowel.play();			
 		}
 	}
 
 	play() {
+		console.log('s play');
 		this.playing = true;
 		this.voice.play_eg();
 		if (this.vowel.isDown()
 			&& Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
 			setTimeout(()=> {
 				setTimeout(()=>{
+					console.log('stop');
 					this.stop();
 				}, this.overwraptime);
+				console.log('vowel');
 				this.vowel.play();
 			}, this.consotime);
 		}

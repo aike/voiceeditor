@@ -18,14 +18,15 @@ class WaveCanvas extends React.Component {
   }
 
   componentDidMount() {
-    this.clear();
+    this.clearBg();
     this.voice = new VoiceApp();
     this.rec = new Recorder(this.voice.out, {numChannels:1});
   }
 
-  clear() {
-    var canvas = document.querySelector('#wavecanvas');
+  clearBg() {
+    var canvas = document.querySelector('#bgcanvas');
     if (canvas == null) return;
+
     var canvasContext = canvas.getContext('2d');
     // clear
     canvasContext.fillStyle = 'rgb(20, 20, 60)';
@@ -52,6 +53,15 @@ class WaveCanvas extends React.Component {
     canvasContext.stroke();
   }
 
+  clearWave() {
+    var canvas = document.querySelector('#wavecanvas');
+    if (canvas == null) return;
+
+    var canvasContext = canvas.getContext('2d');
+    // clear
+    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
   play() {
     const vp = this.props.value.vowel_param;
     this.voice.vowel.voice.level = vp.level / 100.0;
@@ -61,6 +71,9 @@ class WaveCanvas extends React.Component {
     const cp = this.props.value.conso_param;
     const c = this.props.value.conso_type;
     this.voice.conso[c].voice.level = cp.level / 100.0;
+
+    console.log(this.props.value.conso_start + ' ' + this.props.value.vowel_start
+      + ' ' +   this.props.value.conso_end   + ' ' + this.props.value.vowel_end);
 
     this.rec.clear();
     this.rec.record();
@@ -83,10 +96,11 @@ class WaveCanvas extends React.Component {
     }, 1000);
   }
 
+
   drawWave(buf, startpos, endpos) {
 	  var ch = buf[0];
 
-    this.clear();
+    this.clearWave();
     var canvas = document.querySelector('#wavecanvas');
     var canvasContext = canvas.getContext('2d');
 
@@ -100,7 +114,7 @@ class WaveCanvas extends React.Component {
     for (var i = 0; i < len; i++) {
         var idx = zoomstart + i;
         var x = (i / len) * canvas.width;
-        var y = (1 - ch[idx] * 2.0) * canvas.height - canvas.height / 2;
+        var y = (1 - ch[idx] * 1.5) * canvas.height - canvas.height / 2;
         if (i === 0) {
             canvasContext.moveTo(x, y);
         } else {
@@ -139,10 +153,18 @@ class WaveCanvas extends React.Component {
   }
 
   render() {
-    this.clear();
     return (
       <div>
         <div>
+          <canvas
+            id="bgcanvas"
+            width="800"
+            height="400"
+            style={{
+              backgroundColor:'rgb(120, 20, 60)',
+              margin: '30px 10px 0px 0px',
+              float:'left'
+            }}></canvas>
   	      <canvas
   	        id="wavecanvas"
   	        width="800"

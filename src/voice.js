@@ -102,6 +102,7 @@ class Voice
         this.level = 0.4;
         this.eg_t=[0, 0.05, 0.1, 0.15];
         this.eg_a=[0,    1,    1,   0];
+        this.release = 0.01;
         break;
       case "s":
         this.osc = noise;
@@ -115,8 +116,9 @@ class Voice
         this.consoFilter.connect(this.gain);
         this.gain.connect(dest);
         this.level = 0.1;
-        this.eg_t=[0, 0.05, 0.20, 0.3];
-        this.eg_a=[0, 0,    1,    1];
+        this.eg_t=[0, 0.1, 0.3];
+        this.eg_a=[0, 1,     1];
+        this.release = 0.01;
         break;
       case "sy":
         this.osc = noise;
@@ -130,8 +132,9 @@ class Voice
         this.consoFilter.connect(this.gain);
         this.gain.connect(dest);
         this.level = 0.1;
-        this.eg_t=[0, 0.05, 0.20, 0.3];
-        this.eg_a=[0, 0,    1,    1];
+        this.eg_t=[0, 0.1, 0.3];
+        this.eg_a=[0, 1,     1];
+        this.release = 0.01;
         break;
       case "t":
         this.osc = noise;

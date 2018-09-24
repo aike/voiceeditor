@@ -1,6 +1,7 @@
 body {
   background: #333;
   color: #2EF;
+  user-select: none;
 }
 
 .App {

@@ -4,11 +4,16 @@
   "private": true,
   "homepage": "http://aike.github.io/voiceeditor",
   "dependencies": {
+    "inline-worker": "^1.1.0",
+    "rc-slider": "^8.6.3",
     "react": "^16.5.2",
+    "react-canvas-knob": "^0.5.0",
     "react-dom": "^16.5.2",
     "react-scripts": "1.1.5",
-    "rc-slider": "",
-    "react-canvas-knob": ""
+    "react-transform-catch-errors": "^1.0.2",
+    "react-transform-hmr": "^1.0.4",
+    "recorder": "0.0.1",
+    "redbox-react": "^1.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

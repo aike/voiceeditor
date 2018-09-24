@@ -224,6 +224,7 @@ class Voice
     var t0 = this.ctx.currentTime;
     if (this.release == null) {
       this.gain.gain.setValueAtTime(0.0000001, t0);
+      return;
     }
     this.gain.gain.setValueAtTime(this.gain.gain.value, t0);
     this.gain.gain.setTargetAtTime(

@@ -64,6 +64,8 @@ class WaveCanvas extends React.Component {
   }
 
   play() {
+    document.querySelector('#playbutton').disabled = true;
+
     const vp = this.props.value.vowel_param;
     this.voice.vowel.voice.level = vp.level / 100.0;
     this.voice.vowel.voice.attack = vp.attack / 1000.0;
@@ -94,6 +96,7 @@ class WaveCanvas extends React.Component {
       this.rec.stop();
       this.rec.getBuffer((buf)=>{ this.drawWave(buf, this.state.startpos, this.state.endpos); });
       this.rec.exportWAV(this.createDownloadLink);
+      document.querySelector('#playbutton').disabled = false;
     }, 1000);
   }
 
@@ -188,7 +191,7 @@ class WaveCanvas extends React.Component {
               zIndex: '1'
   	        }}></canvas>
   	      <div style={{float:'left'}}>
-  		      <button
+  		      <button id='playbutton'
   		        onClick={() => { this.play(); }}
   		        style={{
                 position: 'absolute',

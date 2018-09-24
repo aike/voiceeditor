@@ -90,6 +90,8 @@ class Voice
         this.level = 0.5;
         this.eg_t=[0, 0.01];
         this.eg_a=[0, 1   ];
+        this.attack = 0.01;
+        this.hold    = -1;
         this.release = 0.01;
         break;
       case "h":
@@ -102,7 +104,9 @@ class Voice
         this.level = 0.4;
         this.eg_t=[0, 0.05, 0.1, 0.15];
         this.eg_a=[0,    1,    1,   0];
-        this.release = 0.01;
+        this.attack  = 0.05;
+        this.hold    = 0.1;
+        this.release = 0.05;
         break;
       case "s":
         this.osc = noise;
@@ -118,6 +122,8 @@ class Voice
         this.level = 0.1;
         this.eg_t=[0, 0.1, 0.3];
         this.eg_a=[0, 1,     1];
+        this.attack  = 0.1;
+        this.hold    = -1;
         this.release = 0.01;
         break;
       case "sy":
@@ -134,6 +140,8 @@ class Voice
         this.level = 0.1;
         this.eg_t=[0, 0.1, 0.3];
         this.eg_a=[0, 1,     1];
+        this.attack  = 0.1;
+        this.hold    = -1;
         this.release = 0.01;
         break;
       case "t":
@@ -142,14 +150,20 @@ class Voice
         this.consoFilter.type = "bandpass";
         this.consoFilter.frequency.value = 200;
         this.consoFilter.Q.value = 5;
+        this.boost = ctx.createGain();
+        this.boost.gain.value = 6.0;
         this.gain = ctx.createGain();
         this.gain.gain.value = 0.0001;
         this.osc.connect(this.consoFilter);
-        this.consoFilter.connect(this.gain);
+        this.consoFilter.connect(this.boost);
+        this.boost.connect(this.gain);
         this.gain.connect(dest);
         this.level = 0.8;
         this.eg_t=[0, 0.01, 0.02];
         this.eg_a=[0,    1,    0];
+        this.attack  = 0.01;
+        this.hold    = 0.0;
+        this.release = 0.01;
         break;
       case "k":
         this.osc = noise;
@@ -157,14 +171,20 @@ class Voice
         this.consoFilter.type = "bandpass";
         this.consoFilter.frequency.value = 500;
         this.consoFilter.Q.value = 2;
+        this.boost = ctx.createGain();
+        this.boost.gain.value = 2.0;
         this.gain = ctx.createGain();
         this.gain.gain.value = 0.0001;
         this.osc.connect(this.consoFilter);
-        this.consoFilter.connect(this.gain);
+        this.consoFilter.connect(this.boost);
+        this.boost.connect(this.gain);
         this.gain.connect(dest);
         this.level = 0.5;
         this.eg_t=[0, 0.01, 0.02];
         this.eg_a=[0,    1,    0];
+        this.attack  = 0.01;
+        this.hold    = 0.0;
+        this.release = 0.01;
         break;
       case "p":
         this.osc = noise;
@@ -172,14 +192,20 @@ class Voice
         this.consoFilter.type = "bandpass";
         this.consoFilter.frequency.value = 200;
         this.consoFilter.Q.value = 5;
+        this.boost = ctx.createGain();
+        this.boost.gain.value = 6.0;
         this.gain = ctx.createGain();
         this.gain.gain.value = 0.0001;
         this.osc.connect(this.consoFilter);
-        this.consoFilter.connect(this.gain);
+        this.consoFilter.connect(this.boost);
+        this.boost.connect(this.gain);
         this.gain.connect(dest);
         this.level = 0.8;
         this.eg_t=[0, 0.01, 0.02];
         this.eg_a=[0,    1,    0];
+        this.attack  = 0.01;
+        this.hold    = 0.0;
+        this.release = 0.01;
         break;
       default:
         break;
@@ -204,12 +230,30 @@ class Voice
     }
     var t0 = this.ctx.currentTime;
     //this.gain.gain.setValueAtTime(0.0000001, this.ctx.currentTime);
-    this.gain.gain.setTargetAtTime(this.eg_a[0] * this.level, t0, this.eg_t[0]);
-    for (let i = 1; i < this.eg_t.length; i++) {
-      this.gain.gain.setTargetAtTime(
-        this.eg_a[i] * this.level,
-        t0 + this.eg_t[i],
-        (this.eg_t[i] - this.eg_t[i - 1]));
+
+    // this.gain.gain.setTargetAtTime(this.eg_a[0] * this.level, t0, this.eg_t[0]);
+    // for (let i = 1; i < this.eg_t.length; i++) {
+    //   this.gain.gain.setTargetAtTime(
+    //     this.eg_a[i] * this.level,
+    //     t0 + this.eg_t[i],
+    //     (this.eg_t[i] - this.eg_t[i - 1]));
+    // }
+
+    // linearRampToValueAtTime(value, endTime)
+    // exponentialRampToValueAtTime(value, endTime)
+    // setTargetAtTime(target, startTime, timeConstant)
+
+    // this.gain.gain.setValueAtTime(0.0000001, t0);
+    // this.gain.gain.setTargetAtTime(this.level, t0, this.attack);
+    // if ((this.char == 'p') || (this.char == 'k') || (this.char == 't')) {
+    //   this.gain.gain.setTargetAtTime(this.level, t0 + this.attack, this.hold);
+    //   this.gain.gain.setTargetAtTime(0.0000001, t0 + this.attack + this.hold, this.release);
+    // }
+    this.gain.gain.setValueAtTime(0.0000001, t0);
+    this.gain.gain.setTargetAtTime(this.level, t0, this.attack);
+    if ((this.char == 'p') || (this.char == 'k') || (this.char == 't')) {
+      this.gain.gain.setTargetAtTime(this.level, t0 + this.attack, this.hold);
+      this.gain.gain.setTargetAtTime(0.0000001, t0 + this.attack + this.hold, this.release);
     }
   }
 
@@ -222,14 +266,25 @@ class Voice
   stop_eg()
   {
     var t0 = this.ctx.currentTime;
-    if (this.release == null) {
-      this.gain.gain.setValueAtTime(0.0000001, t0);
-      return;
-    }
+    // if (this.release == null) {
+    //   this.gain.gain.setValueAtTime(0.0000001, t0);
+    //   return;
+    // }
+    // this.gain.gain.setValueAtTime(this.gain.gain.value, t0);
+    // this.gain.gain.setTargetAtTime(
+    //   0.0000001,
+    //   t0 + this.release,
+    //   this.release);
+
+    // this.gain.gain.setValueAtTime(this.gain.gain.value, t0);
+    // this.gain.gain.setTargetAtTime(
+    //   0.0000001,
+    //   t0 + this.release,
+    //   this.release);
     this.gain.gain.setValueAtTime(this.gain.gain.value, t0);
     this.gain.gain.setTargetAtTime(
       0.0000001,
-      t0 + this.release,
+      t0,
       this.release);
   }
 }

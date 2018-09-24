@@ -66,12 +66,15 @@ class WaveCanvas extends React.Component {
   play() {
     const vp = this.props.value.vowel_param;
     this.voice.vowel.voice.level = vp.level / 100.0;
-    this.voice.vowel.voice.eg_t[1] = vp.attack / 1000.0;
+    this.voice.vowel.voice.attack = vp.attack / 1000.0;
     this.voice.vowel.voice.release = vp.release / 1000.0;
 
     const cp = this.props.value.conso_param;
     const c = this.props.value.conso_type;
-    this.voice.conso[c].voice.level = cp.level / 100.0;
+    this.voice.conso[c].voice.level   = cp.level / 100.0;
+    this.voice.conso[c].voice.attack  = cp.attack / 1000.0;
+    this.voice.conso[c].voice.hold    = cp.hold / 1000.0;
+    this.voice.conso[c].voice.release = cp.release / 1000.0;
 
     this.rec.clear();
     this.rec.record();

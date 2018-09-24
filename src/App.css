@@ -9,6 +9,16 @@ body {
   margin: 20px 100px 200px 100px;
 }
 
+.Logo {
+  position: absolute;
+  top: 18px;
+  left: 775px;
+  font-size: 26px;
+  font-family: 'Share Tech', sans-serif;
+/*  padding-bottom: 0px;
+  border-bottom: 1px solid #2EF; */
+}
+
 .slider-wrapper {
   font-size: 11px;
   width: 800px;
@@ -53,3 +63,13 @@ a:visited { color: #2EF; }
 a:hover { color: #2EF; }
 a:active { color: #2EF; }
 
+.info {
+  position: absolute;
+  top: 750px;
+  left: 100px;
+  background: #282828;
+  width: 780px;
+  height: 90px;
+  font-size: 12px;
+  padding: 10px;
+}

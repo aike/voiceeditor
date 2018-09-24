@@ -163,6 +163,11 @@ class Htype_VoiceButton extends VoiceButton
 
 class Ptype_VoiceButton extends VoiceButton
 {
+	constructor(s, voice) {
+		super(s, voice);
+		this.consotime = 250;
+	}
+
 	down() {
 		this.downing = true;
 		this.downtime = this.ctx.currentTime;

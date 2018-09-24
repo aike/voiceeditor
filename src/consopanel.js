@@ -19,6 +19,9 @@ class ConsoPanel extends React.Component {
       case "release":
         this.setState({release: newValue});
         break;
+      case "vdelay":
+        this.setState({vdelay: newValue});
+        break;
       default:
         break;
     }
@@ -30,10 +33,11 @@ class ConsoPanel extends React.Component {
   render() {
     return (
       <div className="panel">
-        <SmallKnob label="Level"      onChange={(val)=>{ this.handleChange("level",  val); }} value={this.props.value.level} />
-        <SmallKnob label="Attack(ms)" onChange={(val)=>{ this.handleChange("attack", val); }} value={this.props.value.attack} />
-        <SmallKnob label="Hold(ms)"   onChange={(val)=>{ this.handleChange("hold",   val); }} value={this.props.value.hold} />
-        <SmallKnob label="Release(ms" onChange={(val)=>{ this.handleChange("release",val); }} value={this.props.value.release} />
+        <SmallKnob label="Level"            onChange={(val)=>{ this.handleChange("level",  val); }} value={this.props.value.level} />
+        <SmallKnob label="Attack (ms)"      onChange={(val)=>{ this.handleChange("attack", val); }} value={this.props.value.attack} />
+        <SmallKnob label="Hold (ms)"        onChange={(val)=>{ this.handleChange("hold",   val); }} value={this.props.value.hold} />
+        <SmallKnob label="Release (ms)"     onChange={(val)=>{ this.handleChange("release",val); }} value={this.props.value.release} />
+        <SmallKnob label="Vowel Delay (ms)" onChange={(val)=>{ this.handleChange("vdelay" ,val); }} value={this.props.value.vdelay} />
         <br />
         Consonant
       </div>

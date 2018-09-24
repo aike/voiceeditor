@@ -214,7 +214,7 @@ class WaveCanvas extends React.Component {
                 vertical={true}
                 defaultValue={1}
                 step={0.1}
-                min={0.1}
+                min={0.3}
                 max={10}
                 onChange={(value) => {this.setLevelZoom(value);}}
               />

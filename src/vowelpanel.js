@@ -35,12 +35,12 @@ class VowelPanel extends React.Component {
   render() {
     return (
       <div className="panel">
-        <SmallKnob label="Level"   onChange={(val)=>{ this.handleChange("level",   val); }} value={this.props.value.level} />
-        <SmallKnob label="Attack"  onChange={(val)=>{ this.handleChange("attack",  val); }} value={this.props.value.attack} />
-        <SmallKnob label="Release" onChange={(val)=>{ this.handleChange("release", val); }} value={this.props.value.release} />
-        <SmallKnob label="F1"      onChange={(val)=>{ this.handleChange("f1",      val); }} value={this.props.value.f1} max={1000} />
-        <SmallKnob label="F2"      onChange={(val)=>{ this.handleChange("f2",      val); }} value={this.props.value.f2} max={3000} />
-        <SmallKnob label="A.Pitch" onChange={(val)=>{ this.handleChange("apitch",  val); }} value={this.props.value.apitch} />
+        <SmallKnob label="Level"       onChange={(val)=>{ this.handleChange("level",   val); }} value={this.props.value.level} />
+        <SmallKnob label="Attack(ms)"  onChange={(val)=>{ this.handleChange("attack",  val); }} value={this.props.value.attack} />
+        <SmallKnob label="Release(ms)" onChange={(val)=>{ this.handleChange("release", val); }} value={this.props.value.release} />
+        <SmallKnob label="F1(Hz)"      onChange={(val)=>{ this.handleChange("f1",      val); }} value={this.props.value.f1} max={1000} />
+        <SmallKnob label="F2(Hz)"      onChange={(val)=>{ this.handleChange("f2",      val); }} value={this.props.value.f2} max={3000} />
+        {/* <SmallKnob label="A.Pitch"     onChange={(val)=>{ this.handleChange("apitch",  val); }} value={this.props.value.apitch} /> */}
         <br />
         Vowel
       </div>

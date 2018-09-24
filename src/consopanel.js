@@ -30,10 +30,10 @@ class ConsoPanel extends React.Component {
   render() {
     return (
       <div className="panel">
-        <SmallKnob label="Level"   onChange={(val)=>{ this.handleChange("level",  val); }} value={this.props.value.level} />
-        <SmallKnob label="Attack"  onChange={(val)=>{ this.handleChange("attack", val); }} value={this.props.value.attack} />
-        <SmallKnob label="Hold"    onChange={(val)=>{ this.handleChange("hold",   val); }} value={this.props.value.hold} />
-        <SmallKnob label="Release" onChange={(val)=>{ this.handleChange("release",val); }} value={this.props.value.release} />
+        <SmallKnob label="Level"      onChange={(val)=>{ this.handleChange("level",  val); }} value={this.props.value.level} />
+        <SmallKnob label="Attack(ms)" onChange={(val)=>{ this.handleChange("attack", val); }} value={this.props.value.attack} />
+        <SmallKnob label="Hold(ms)"   onChange={(val)=>{ this.handleChange("hold",   val); }} value={this.props.value.hold} />
+        <SmallKnob label="Release(ms" onChange={(val)=>{ this.handleChange("release",val); }} value={this.props.value.release} />
         <br />
         Consonant
       </div>

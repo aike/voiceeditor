@@ -72,8 +72,6 @@ class App extends Component {
   }
 
   render() {
-    const current = this.state.conso_param;
-
     return (
       <div className="App">
         <div className="Logo">voice editor</div>

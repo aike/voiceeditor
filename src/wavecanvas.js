@@ -77,6 +77,7 @@ class WaveCanvas extends React.Component {
     this.voice.conso[c].voice.attack  = cp.attack / 1000.0;
     this.voice.conso[c].voice.hold    = cp.hold / 1000.0;
     this.voice.conso[c].voice.release = cp.release / 1000.0;
+    this.voice.conso[c].voice.vowel_delay = cp.vdelay / 1000.0;
 
     this.rec.clear();
     this.rec.record();
@@ -118,7 +119,7 @@ class WaveCanvas extends React.Component {
     for (var i = 0; i < len; i++) {
         var idx = zoomstart + i;
         var x = (i / len) * canvas.width;
-        var y = (1 - ch[idx] * this.state.boost) * canvas.height - canvas.height / 2;
+        var y = (1 - ch[idx] * Math.pow(2, this.state.boost)) * canvas.height - canvas.height / 2;
         if (i === 0) {
             canvasContext.moveTo(x, y);
         } else {
@@ -205,7 +206,7 @@ class WaveCanvas extends React.Component {
                 position: 'absolute',
                 top: '220px',
                 left: '920px',
-  		        }} 
+  		        }}
                 />
             <div
               style={{
@@ -214,14 +215,14 @@ class WaveCanvas extends React.Component {
                 left: '960px',
                 width: '30px',
                 height: '200px'
-              }} 
+              }}
             >
               <Slider
                 vertical={true}
                 defaultValue={1}
                 step={0.1}
-                min={0.3}
-                max={10}
+                min={-2}
+                max={4}
                 onChange={(value) => {this.setLevelZoom(value);}}
               />
             </div>

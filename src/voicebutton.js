@@ -63,6 +63,11 @@ class VoicePad
 		this.voice.play_eg();
 	}
 
+	delayedPlay(delay) {
+		this.playing = true;
+		this.voice.play_delayed_eg(delay);
+	}
+
 	stop() {
 		this.playing = false;
 		this.voice.stop_eg();
@@ -90,7 +95,6 @@ class VoiceButton
 		this.vowel = null;
 		this.downing = false;
 		this.playing = false;
-		this.consotime = 100;
 		this.voice = voice;
 	}
 
@@ -155,9 +159,7 @@ class Htype_VoiceButton extends VoiceButton
 	play() {
 		this.playing = true;
 		this.voice.play_eg();
-		if (!this.vowel.isPlaying()) {
-			this.vowel.play();
-		}
+		this.vowel.delayedPlay(this.voice.vowel_delay);
 	}
 }
 
@@ -165,7 +167,6 @@ class Ptype_VoiceButton extends VoiceButton
 {
 	constructor(s, voice) {
 		super(s, voice);
-		this.consotime = 250;
 	}
 
 	down() {
@@ -177,6 +178,11 @@ class Ptype_VoiceButton extends VoiceButton
 		}
 	}
 
+	up() {
+		this.downing = false;
+		this.playing = false;
+	}
+
 	onVowelDown() {
 		this.play();
 	}
@@ -184,21 +190,12 @@ class Ptype_VoiceButton extends VoiceButton
 	play() {
 		this.playing = true;
 		this.voice.play_eg();
-		setTimeout(()=> {
-			this.stop();
-			this.vowel.play();
-		}, this.consotime);
+		this.vowel.delayedPlay(this.voice.vowel_delay);
 	}
 }
 
 class Stype_VoiceButton extends VoiceButton
 {
-	constructor(s, voice) {
-		super(s, voice);
-		this.consotime = 200;
-		this.overwraptime = 60;
-	}
-
 	down() {
 		this.downing = true;
 		this.downtime = this.ctx.currentTime;
@@ -213,22 +210,18 @@ class Stype_VoiceButton extends VoiceButton
 			return;
 		}
 		this.downing = false;
+		this.stop();
 		if (this.vowel.isDown()) {
-			this.vowel.play();
+			this.vowel.delayedPlay(this.voice.vowel_delay);
 		}
-		setTimeout(()=>{
-			this.stop();
-		}, this.overwraptime);
 	}
 
 	onVowelDown() {
 		if (Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
 			setTimeout(()=> {
-				setTimeout(()=>{
-					this.stop();
-				}, this.overwraptime);
-				this.vowel.play();
-			}, this.consotime);
+				this.stop();
+				this.vowel.delayedPlay(this.voice.vowel_delay);
+			}, (this.voice.attack + this.voice.hold) * 1000);
 		}
 	}
 
@@ -238,11 +231,9 @@ class Stype_VoiceButton extends VoiceButton
 		if (this.vowel.isDown()
 			&& Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
 			setTimeout(()=> {
-				setTimeout(()=>{
-					this.stop();
-				}, this.overwraptime);
-				this.vowel.play();
-			}, this.consotime);
+				this.stop();
+				this.vowel.delayedPlay(this.voice.vowel_delay);
+			}, (this.voice.attack + this.voice.hold) * 1000);
 		}
 	}
 }

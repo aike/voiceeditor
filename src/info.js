@@ -32,15 +32,14 @@ class Info extends React.Component {
     switch (c) {
       case 'h':
         return 'h_type';
-        break;
       case 's':
       case 'sy':
         return 's_type';
-        break;
       case 'p':
       case 'k':
       case 't':
         return 'p_type';
+      default:
         break;
     }
   }

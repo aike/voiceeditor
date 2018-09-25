@@ -58,17 +58,20 @@ class VoicePad
 	}
 
 	play() {
+		console.log('vowel play');
 		this.playing = true;
 		//this.voice.play();
 		this.voice.play_eg();
 	}
 
 	delayedPlay(delay) {
+		console.log('vowel delayed play');
 		this.playing = true;
 		this.voice.play_delayed_eg(delay);
 	}
 
 	stop() {
+		console.log('vowel stop');
 		this.playing = false;
 		this.voice.stop_eg();
 	}
@@ -165,10 +168,6 @@ class Htype_VoiceButton extends VoiceButton
 
 class Ptype_VoiceButton extends VoiceButton
 {
-	constructor(s, voice) {
-		super(s, voice);
-	}
-
 	down() {
 		this.downing = true;
 		this.downtime = this.ctx.currentTime;
@@ -206,10 +205,11 @@ class Stype_VoiceButton extends VoiceButton
 	}
 
 	up() {
-		if (Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
+		this.downing = false;
+		if (!this.playing) {
+			// 同時押しでstop済みのとき
 			return;
 		}
-		this.downing = false;
 		this.stop();
 		if (this.vowel.isDown()) {
 			this.vowel.delayedPlay(this.voice.vowel_delay);

@@ -259,7 +259,7 @@ class Voice
     // }
     this.gain.gain.setValueAtTime(this.zero, t0);
     this.gain.gain.setTargetAtTime(this.level, t0, this.attack);
-    if ((this.char == 'p') || (this.char == 'k') || (this.char == 't')) {
+    if ((this.char === 'p') || (this.char === 'k') || (this.char === 't')) {
       this.gain.gain.setTargetAtTime(this.level, t0 + this.attack, this.hold);
       this.gain.gain.setTargetAtTime(this.zero, t0 + this.attack + this.hold, this.release);
     }
@@ -275,7 +275,7 @@ class Voice
     this.gain.gain.setValueAtTime(this.zero, t0);
     this.gain.gain.setTargetAtTime(this.zero, t0, delay);
     this.gain.gain.setTargetAtTime(this.level, t0 + delay, this.attack);
-    if ((this.char == 'p') || (this.char == 'k') || (this.char == 't')) {
+    if ((this.char === 'p') || (this.char === 'k') || (this.char === 't')) {
       this.gain.gain.setTargetAtTime(this.level, t0 + delay + this.attack, this.hold);
       this.gain.gain.setTargetAtTime(this.zero, t0 + delay + this.attack + this.hold, this.release);
     }

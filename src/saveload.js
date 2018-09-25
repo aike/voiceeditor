@@ -12,28 +12,53 @@ class SaveLoad extends React.Component {
         this.props.onChange(json.state, json.conso_params);
       }
     };
+  }
 
-    this.file = document.querySelector('#load');
-    this.file.addEventListener('change', (e)=> {
-      this.reader.readAsText(e.target.files[0]);
+  handleImport() {
+    var dialog = document.querySelector('#importdialog');
+    dialog.showModal();
+
+    var parent = document.querySelector('#importform');
+    if (parent.firstChild != null) {
+      parent.removeChild(parent.firstChild);
+    }
+
+    var input = document.createElement('input');
+    input.type='file';
+    input.id='inportfile'
+    parent.appendChild(input);
+
+    input.addEventListener('change', (e)=> {
       e.preventDefault();
+      this.reader.readAsText(e.target.files[0]);
+      setTimeout(()=>{
+        var parent = document.querySelector('#importform');
+        if (parent.firstChild != null) {
+          parent.removeChild(parent.firstChild);
+        }
+        var dialog = document.querySelector('#importdialog');
+        dialog.close();
+      }, 500);
     }, false);
   }
 
-  handleDownload() {
-    var parent = document.querySelector('#savelink');
+  handleExport() {
+    var dialog = document.querySelector('#exportdialog');
+    dialog.showModal();
+
+    var parent = document.querySelector('#exportlink');
     if (parent.firstChild != null) {
       parent.removeChild(parent.firstChild);
     }
 
     var data = this.props.value;
-    var blob = new Blob([JSON.stringify(data, null , '  ')], { type: 'application\/json' });
+    var blob = new Blob([JSON.stringify(data, null , '  ')], { type: 'application/json' });
 
     var url = URL.createObjectURL(blob);
     var div = document.createElement('div');
     var link = document.createElement('a');
     link.href = url;
-    link.download = 'export.json';
+    link.download = 'voicedata.json';
     link.innerHTML = 'download';
     div.appendChild(link);
     parent.appendChild(div);
@@ -42,9 +67,43 @@ class SaveLoad extends React.Component {
   render() {
     return (
       <div className="panel" style={{position:'absolute',top:'900px',left:'100px'}}>
-        <input type="file" id="load" />
-        <button id="save" download="test.json" onClick={()=>{this.handleDownload();}}>Export</button>
-        <div id="savelink"></div>
+        <button id="import" onClick={()=>{this.handleImport();}} style={{marginLeft:'250px'}}>Import</button>
+        <button id="export" onClick={()=>{this.handleExport();}} style={{marginLeft: '100px'}}>Export</button>
+
+        <dialog
+          id="importdialog"
+          style={{
+          }}>
+          <div className="dialogheader">
+          Inport Voice Data
+          </div>
+          <div className="dialogbody">
+            インポートするファイルを選択してください
+          <div style={{fontSize:'9px', color:'#AAA'}}>ブラウザで処理されるだけで、外部に送信はされません</div>
+          </div>
+          <div id="importform" style={{marginTop:'5px'}}>
+          </div>
+          <div className="dialogfooter">
+            <button onClick={()=>{document.querySelector('#importdialog').close();}}>Close</button>
+          </div>
+        </dialog>
+
+        <dialog
+          id="exportdialog"
+          style={{
+          }}>
+          <div className="dialogheader">
+          Export Voice Data
+          </div>
+          <div className="dialogbody">
+            リンクをクリックして保存してください
+          </div>
+          <div id="exportlink" style={{fontSize:'18px'}}></div>
+          <div className="dialogfooter">
+            <button onClick={()=>{document.querySelector('#exportdialog').close();}}>Close</button>
+          </div>
+        </dialog>
+
       </div>
     );
   }

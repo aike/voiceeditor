@@ -5,6 +5,7 @@ class ConsoDropDown extends React.Component {
     return (
       <select name="conso"
         onChange={(e)=>{this.props.onChange(e.target.value);}}
+        value={this.props.value}
         style={{
           width:100,
           height:22,

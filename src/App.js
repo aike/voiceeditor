@@ -7,6 +7,7 @@ import VowelPanel from './vowelpanel';
 import WaveCanvas from './wavecanvas';
 import ConsoDropDown from './consodropdown';
 import Info from './info';
+import SaveLoad from './saveload';
 
 const TipRange = Slider.createSliderWithTooltip(Slider.Range);
 
@@ -71,11 +72,18 @@ class App extends Component {
     this.setState({vowel_param: val});
   }
 
+  handleImport(st, cp)
+  {
+    console.log('handleImport');
+    this.setState(st);
+    this.conso_params = cp;
+  }
+
   render() {
     return (
       <div className="App">
         <div className="Logo">voice editor</div>
-        <ConsoDropDown onChange={(val)=>{this.handleChangeDropDown(val);}} />
+        <ConsoDropDown value={this.state.conso_type} onChange={(val)=>{this.handleChangeDropDown(val);}} />
         <div className="slider-wrapper">
           <div>Consonant Button Push/Release</div>
           <TipRange
@@ -103,6 +111,7 @@ class App extends Component {
           <ConsoPanel value={this.state.conso_param} onChange={(val)=>{this.handleChangeConsoValue(val);}} />
           <VowelPanel value={this.state.vowel_param} onChange={(val)=>{this.handleChangeVowel(val);}} />
         </div>
+        <SaveLoad value={{state:this.state, conso_params:this.conso_params}} onChange={(st, cp)=>{this.handleImport(st, cp);}} />
         <Info value={this.state.conso_type} />
       </div>
     );

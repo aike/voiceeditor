@@ -41,8 +41,7 @@ class VowelPanel extends React.Component {
         <SmallKnob label="F1 (Hz)"      onChange={(val)=>{ this.handleChange("f1",      val); }} value={this.props.value.f1} max={1000} />
         <SmallKnob label="F2 (Hz)"      onChange={(val)=>{ this.handleChange("f2",      val); }} value={this.props.value.f2} max={3000} />
         {/* <SmallKnob label="A.Pitch"     onChange={(val)=>{ this.handleChange("apitch",  val); }} value={this.props.value.apitch} /> */}
-        <br />
-        Vowel
+        <div style={{position:'absolute', top:'110px', left:'625px'}}>Vowel</div>
       </div>
     );
   }

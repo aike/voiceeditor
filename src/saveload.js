@@ -66,7 +66,7 @@ class SaveLoad extends React.Component {
 
   render() {
     return (
-      <div className="panel" style={{position:'absolute',top:'900px',left:'100px'}}>
+      <div className="panel" style={{position:'absolute',top:'870px',left:'100px'}}>
         <button id="import" onClick={()=>{this.handleImport();}} style={{marginLeft:'250px'}}>Import</button>
         <button id="export" onClick={()=>{this.handleExport();}} style={{marginLeft: '100px'}}>Export</button>
 

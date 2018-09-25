@@ -25,7 +25,7 @@ class SaveLoad extends React.Component {
 
     var input = document.createElement('input');
     input.type='file';
-    input.id='inportfile'
+    input.id='importfile'
     parent.appendChild(input);
 
     input.addEventListener('change', (e)=> {
@@ -75,7 +75,7 @@ class SaveLoad extends React.Component {
           style={{
           }}>
           <div className="dialogheader">
-          Inport Voice Data
+          Import Voice Data
           </div>
           <div className="dialogbody">
             インポートするファイルを選択してください

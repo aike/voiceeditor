@@ -125,14 +125,14 @@ class WaveCanvas extends React.Component {
             canvasContext.lineTo(x, y);
         }
     }
-    canvasContext.stroke();	
+    canvasContext.stroke();
   }
 
   createDownloadLink(blob) {
     var url = URL.createObjectURL(blob);
     var div = document.createElement('div');
     var link = document.createElement('a');
- 
+
     link.href = url;
     link.download = 'audio.wav';
     link.innerHTML = 'download';

@@ -233,17 +233,14 @@ class Stype_VoiceButton extends VoiceButton
 	}
 
 	play() {
-		console.log('s play');
 		this.playing = true;
 		this.voice.play_eg();
 		if (this.vowel.isDown()
 			&& Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
 			setTimeout(()=> {
 				setTimeout(()=>{
-					console.log('stop');
 					this.stop();
 				}, this.overwraptime);
-				console.log('vowel');
 				this.vowel.play();
 			}, this.consotime);
 		}

@@ -28,7 +28,7 @@ class ConsoPanel extends React.Component {
     if (this.props.onChange) {
       this.props.onChange(this.state);
     }
-  }  
+  }
 
   render() {
     return (

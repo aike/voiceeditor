@@ -24,7 +24,7 @@ class VoicePad
 		this.posx = Math.min(Math.max(x, 0.0), 1.0);
 		this.posy = Math.min(Math.max(y, 0.0), 1.0);
 		this.voice.f1 = this.posx * 1000;
-		this.voice.f2 = this.posx * 3000;
+		this.voice.f2 = this.posy * 3000;
 		this.voice.filter.F1.frequency.setValueAtTime(this.voice.f1, this.ctx.currentTime);
 		this.voice.filter.F2.frequency.setValueAtTime(this.voice.f2, this.ctx.currentTime);
 		for (var i = 0; i < this.consos.length; i++) {
@@ -40,7 +40,7 @@ class VoicePad
 		this.posx = Math.min(Math.max(x, 0), 1);
 		this.posy = Math.min(Math.max(y, 0), 1);
 		this.voice.f1 = this.posx * 1000;
-		this.voice.f2 = this.posx * 3000;
+		this.voice.f2 = this.posy * 3000;
 		this.voice.filter.F1.frequency.setValueAtTime(this.voice.f1, this.ctx.currentTime);
 		this.voice.filter.F2.frequency.setValueAtTime(this.voice.f2, this.ctx.currentTime);
 	}

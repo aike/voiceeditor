@@ -4,25 +4,31 @@ import SmallKnob from './smallknob.js';
 class VowelPanel extends React.Component {
   state = this.props.value;
 
-  handleChange = (key, newValue) => {
+  handleChange = (key, val) => {
     switch (key) {
       case "level":
-        this.setState({level: newValue});
+        this.setState({level: val});
         break;
       case "attack":
-        this.setState({attack: newValue});
+        this.setState({attack: val});
         break;
       case "release":
-        this.setState({release: newValue});
+        this.setState({release: val});
+        break;
+      case "pre_f1":
+        this.setState({pre_f1: val});
+        break;
+      case "pre_f2":
+        this.setState({pre_f2: val});
+        break;
+      case "pre_time":
+        this.setState({pre_time: val});
         break;
       case "f1":
-        this.setState({f1: newValue});
+        this.setState({f1: val});
         break;
       case "f2":
-        this.setState({f2: newValue});
-        break;
-      case "apitch":
-        this.setState({apitch: newValue});
+        this.setState({f2: val});
         break;
       default:
         break;
@@ -35,13 +41,15 @@ class VowelPanel extends React.Component {
   render() {
     return (
       <div className="panel">
-        <SmallKnob label="Level"        onChange={(val)=>{ this.handleChange("level",   val); }} value={this.props.value.level} />
-        <SmallKnob label="Attack (ms)"  onChange={(val)=>{ this.handleChange("attack",  val); }} value={this.props.value.attack} />
-        <SmallKnob label="Release (ms)" onChange={(val)=>{ this.handleChange("release", val); }} value={this.props.value.release} />
-        <SmallKnob label="F1 (Hz)"      onChange={(val)=>{ this.handleChange("f1",      val); }} value={this.props.value.f1} max={1000} />
-        <SmallKnob label="F2 (Hz)"      onChange={(val)=>{ this.handleChange("f2",      val); }} value={this.props.value.f2} max={3000} />
-        {/* <SmallKnob label="A.Pitch"     onChange={(val)=>{ this.handleChange("apitch",  val); }} value={this.props.value.apitch} /> */}
-        <div style={{position:'absolute', top:'110px', left:'625px'}}>Vowel</div>
+        <SmallKnob label="Level"       onChange={(val)=>{ this.handleChange("level",   val); }} value={this.props.value.level} />
+        <SmallKnob label="Attack"      onChange={(val)=>{ this.handleChange("attack",  val); }} value={this.props.value.attack} />
+        <SmallKnob label="Release"     onChange={(val)=>{ this.handleChange("release", val); }} value={this.props.value.release} />
+        <SmallKnob label="pre F1 (Hz)" onChange={(val)=>{ this.handleChange("pre_f1",  val); }} value={this.props.value.pre_f1} max={1000} />
+        <SmallKnob label="pre F2 (Hz)" onChange={(val)=>{ this.handleChange("pre_f2",  val); }} value={this.props.value.pre_f2} max={3000} />
+        <SmallKnob label="pre Time"    onChange={(val)=>{ this.handleChange("pre_time",val); }} value={this.props.value.pre_time} />
+        <SmallKnob label="F1 (Hz)"     onChange={(val)=>{ this.handleChange("f1",      val); }} value={this.props.value.f1} max={1000} />
+        <SmallKnob label="F2 (Hz)"     onChange={(val)=>{ this.handleChange("f2",      val); }} value={this.props.value.f2} max={3000} />
+        <div style={{position:'absolute', top:'87px', left:'600px', fontSize:'11px'}}>Vowel</div>
       </div>
     );
   }

@@ -95,6 +95,11 @@ class Voice
         this.attack = 0.01;
         this.hold    = -1;
         this.release = 0.01;
+        this.pre_f1 = 800;
+        this.pre_f2 = 1200;
+        this.pre_time = 0;
+        this.f1 = 800;
+        this.f2 = 1200;
         break;
       case "h":
         this.osc = lpf_noise;
@@ -221,6 +226,18 @@ class Voice
 
   }
 
+  formant_move(offset)
+  {
+    if ((this.pre_time == null) || (this.pre_time === 0)) {
+      return;
+    }
+    const t0 = this.ctx.currentTime + offset;
+    this.filter.F1.frequency.setValueAtTime(this.pre_f1, t0);
+    this.filter.F2.frequency.setValueAtTime(this.pre_f2, t0);
+    this.filter.F1.frequency.setTargetAtTime(this.f1, t0, this.pre_time);
+    this.filter.F2.frequency.setTargetAtTime(this.f2, t0, this.pre_time);
+  }
+
   play()
   {
     if (!this.init) {
@@ -258,6 +275,7 @@ class Voice
     //   this.gain.gain.setTargetAtTime(0.0000001, t0 + this.attack + this.hold, this.release);
     // }
     this.gain.gain.setValueAtTime(this.zero, t0);
+    this.formant_move(0);
     this.gain.gain.setTargetAtTime(this.level, t0, this.attack);
     if ((this.char === 'p') || (this.char === 'k') || (this.char === 't')) {
       this.gain.gain.setTargetAtTime(this.level, t0 + this.attack, this.hold);
@@ -274,6 +292,7 @@ class Voice
     var t0 = this.ctx.currentTime;
     this.gain.gain.setValueAtTime(this.zero, t0);
     this.gain.gain.setTargetAtTime(this.zero, t0, delay);
+    this.formant_move(delay);
     this.gain.gain.setTargetAtTime(this.level, t0 + delay, this.attack);
     if ((this.char === 'p') || (this.char === 'k') || (this.char === 't')) {
       this.gain.gain.setTargetAtTime(this.level, t0 + delay + this.attack, this.hold);

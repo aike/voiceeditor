@@ -30,19 +30,20 @@ body {
 }
 
 .smallknob-body {
-  margin: 30px 10px 0px 10px;
+  margin: 25px 8px 0px 8px;
 }
 
 .smallknob-label {
   margin-top: -10px;
   margin-bottom: 20px;
   text-align: center;
-  font-size: 11px;
+  font-size: 9px;
 }
 
 .panel {
   float: left;
-  margin-right: 30px;
+  margin-left: 20px;
+  margin-right: 5px;
   color: #2EF;
   text-align: center;
   font-size: 12px;
@@ -65,7 +66,7 @@ a:active { color: #2EF; }
 
 .info {
   position: absolute;
-  top: 720px;
+  top: 700px;
   left: 100px;
   background: #282828;
   width: 780px;

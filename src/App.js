@@ -19,7 +19,7 @@ class App extends Component {
     vowel_start: 0.2,
     vowel_end: 0.8,
     conso_param: {level: 80, attack: 10, hold: 40, release: 10, vdelay: 20},
-    vowel_param: {level: 80, attack: 10, release: 10, f1: 800, f2: 1200, apitch: 0},
+    vowel_param: {level: 80, attack: 10, release: 10, pre_f1: 800, pre_f2: 1200, pre_time:50, f1:800, f2:1200},
   };
   conso_params = {
     h:  {level: 80, attack: 10, hold: 40, release: 10, vdelay: 20},

@@ -23,8 +23,10 @@ class VoicePad
 		this.downtime = this.ctx.currentTime;
 		this.posx = Math.min(Math.max(x, 0.0), 1.0);
 		this.posy = Math.min(Math.max(y, 0.0), 1.0);
-		this.voice.filter.F1.frequency.setValueAtTime(this.posx * 1000, this.ctx.currentTime);
-		this.voice.filter.F2.frequency.setValueAtTime(this.posy * 3000, this.ctx.currentTime);
+		this.voice.f1 = this.posx * 1000;
+		this.voice.f2 = this.posx * 3000;
+		this.voice.filter.F1.frequency.setValueAtTime(this.voice.f1, this.ctx.currentTime);
+		this.voice.filter.F2.frequency.setValueAtTime(this.voice.f2, this.ctx.currentTime);
 		for (var i = 0; i < this.consos.length; i++) {
 			if (this.consos[i].isDown()) {
 				this.consos[i].onVowelDown();
@@ -37,8 +39,16 @@ class VoicePad
 	move(x, y) {
 		this.posx = Math.min(Math.max(x, 0), 1);
 		this.posy = Math.min(Math.max(y, 0), 1);
-		this.voice.filter.F1.frequency.setValueAtTime(this.posx * 1000, this.ctx.currentTime);
-		this.voice.filter.F2.frequency.setValueAtTime(this.posy * 3000, this.ctx.currentTime);
+		this.voice.f1 = this.posx * 1000;
+		this.voice.f2 = this.posx * 3000;
+		this.voice.filter.F1.frequency.setValueAtTime(this.voice.f1, this.ctx.currentTime);
+		this.voice.filter.F2.frequency.setValueAtTime(this.voice.f2, this.ctx.currentTime);
+	}
+
+	setFormantMove(pre_f1, pre_f2, pre_time) {
+		this.voice.pre_f1 = pre_f1;
+		this.voice.pre_f2 = pre_f2;
+		this.voice.pre_time = pre_time;
 	}
 
 	downFreq(f1, f2)

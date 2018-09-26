@@ -45,10 +45,11 @@ class VoicePad
 		this.voice.filter.F2.frequency.setValueAtTime(this.voice.f2, this.ctx.currentTime);
 	}
 
-	setFormantMove(pre_f1, pre_f2, pre_time) {
+	setFormantMove(pre_f1, pre_time1, pre_f2, pre_time2) {
 		this.voice.pre_f1 = pre_f1;
+		this.voice.pre_time1 = pre_time1;
 		this.voice.pre_f2 = pre_f2;
-		this.voice.pre_time = pre_time;
+		this.voice.pre_time2 = pre_time2;
 	}
 
 	downFreq(f1, f2)

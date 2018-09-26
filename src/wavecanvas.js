@@ -70,7 +70,7 @@ class WaveCanvas extends React.Component {
     this.voice.vowel.voice.level = vp.level / 100.0;
     this.voice.vowel.voice.attack = vp.attack / 1000.0;
     this.voice.vowel.voice.release = vp.release / 1000.0;
-    this.voice.vowel.setFormantMove(vp.pre_f1, vp.pre_f2, vp.pre_time / 1000.0);
+    this.voice.vowel.setFormantMove(vp.pre_f1, vp.pre_time1, vp.pre_f2, vp.pre_time2 / 1000.0);
 
     const cp = this.props.value.conso_param;
     const c = this.props.value.conso_type;

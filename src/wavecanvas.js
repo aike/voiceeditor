@@ -183,10 +183,10 @@ class WaveCanvas extends React.Component {
           <canvas
             id="bgcanvas"
             width="800"
-            height="400"
+            height="300"
             style={{
               position: 'absolute',
-              top: '170px',
+              top: '135px',
               left: '100px',
               backgroundColor:'rgb(120, 20, 60)',
               zIndex: '0'
@@ -194,10 +194,10 @@ class WaveCanvas extends React.Component {
   	      <canvas
   	        id="wavecanvas"
   	        width="800"
-  	        height="400"
+  	        height="300"
   	        style={{
               position: 'absolute',
-              top: '170px',
+              top: '135px',
               left: '100px',
               zIndex: '1'
   	        }}></canvas>
@@ -206,25 +206,25 @@ class WaveCanvas extends React.Component {
   		        onClick={() => { this.play(); }}
   		        style={{
                 position: 'absolute',
-                top: '170px',
-                left: '920px',
+                top: '163px',
+                left: '930px',
   		        	width:'100px',
   		        	height:'30px',
   		        }}>Play</button>
   		      <div id="wavlink"
   		        style={{
                 position: 'absolute',
-                top: '220px',
-                left: '920px',
+                top: '200px',
+                left: '940px',
   		        }}
                 />
             <div
               style={{
                 position: 'absolute',
-                top: '320px',
-                left: '960px',
+                top: '245px',
+                left: '970px',
                 width: '30px',
-                height: '200px'
+                height: '180px'
               }}
             >
               <Slider
@@ -241,7 +241,7 @@ class WaveCanvas extends React.Component {
         <div
           style={{
             position: 'absolute',
-            top: '570px',
+            top: '435px',
             left: '100px',
             width:'800px'
         }}>

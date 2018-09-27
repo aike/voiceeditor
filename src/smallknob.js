@@ -6,8 +6,8 @@ class SmallKnob extends React.Component {
   state = {
   	value: this.props.value,
     max: this.props.max,
-  	width:45,
-  	height:45,
+  	width:48,
+  	height:48,
   	angleArc: 270,
   	angleOffset: -135,
   	className: 'smallknob-body',

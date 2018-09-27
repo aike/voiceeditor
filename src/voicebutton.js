@@ -149,6 +149,13 @@ class VoiceButton
 	addVowel(v) {
 		this.vowel = v;
 	}
+
+	isSameTimeDown() {
+		if (Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
+			return true;
+		}
+		return false;
+	}
 }
 
 class Htype_VoiceButton extends VoiceButton
@@ -210,42 +217,42 @@ class Stype_VoiceButton extends VoiceButton
 		this.downing = true;
 		this.downtime = this.ctx.currentTime;
 		if (this.vowel.isDown()) {
-			this.vowel.stop();
+			if (this.isSameTimeDown()) {
+				this.one_shot_play();
+			}
+		} else {
+			this.play();
 		}
-		this.play();
 	}
 
 	up() {
 		this.downing = false;
-		if (!this.playing) {
-			// 同時押しでstop済みのとき
-			return;
-		}
-		this.stop();
-		if (this.vowel.isDown()) {
-			this.vowel.delayedPlay(this.voice.vowel_delay);
+		if (this.playing) {
+			this.stop();
 		}
 	}
 
 	onVowelDown() {
-		if (Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
-			setTimeout(()=> {
-				this.stop();
-				this.vowel.delayedPlay(this.voice.vowel_delay);
-			}, (this.voice.attack + this.voice.hold) * 1000);
+		if (this.isSameTimeDown()) {
+			this.one_shot_play();
+		} else {
+			this.stop();
+			this.vowel.delayedPlay(this.voice.vowel_delay);
 		}
 	}
 
 	play() {
 		this.playing = true;
 		this.voice.play_eg();
-		if (this.vowel.isDown()
-			&& Math.abs(this.vowel.downtime - this.downtime) < 0.05) {
-			setTimeout(()=> {
-				this.stop();
-				this.vowel.delayedPlay(this.voice.vowel_delay);
-			}, (this.voice.attack + this.voice.hold) * 1000);
-		}
+	}
+
+	one_shot_play() {
+		this.playing = true;
+		this.voice.play_eg();
+		setTimeout(()=> {
+			this.stop();
+			this.vowel.delayedPlay(this.voice.vowel_delay);
+		}, (this.voice.attack + this.voice.hold) * 1000);
 	}
 }
 

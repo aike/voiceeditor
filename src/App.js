@@ -18,11 +18,11 @@ class App extends Component {
     conso_end: 0.5,
     vowel_start: 0.2,
     vowel_end: 0.8,
-    conso_param: {level: 80, attack: 10, hold: 40, release: 10, vdelay: 20},
+    conso_param: {level: 80, attack:  0, hold: 40, release: 10, vdelay: 20},
     vowel_param: {level: 80, attack: 10, release: 10, pre_f1: 600, pre_time1:50, pre_f2: 1600, pre_time2:100, f1:800, f2:1200},
   };
   conso_params = {
-    h:  {level: 80, attack: 10, hold: 40, release: 10, vdelay: 20},
+    h:  {level: 80, attack:  0, hold: 40, release: 10, vdelay: 20},
     s:  {level: 80, attack: 10, hold: 40, release: 10, vdelay: 20},
     sy: {level: 80, attack: 10, hold: 40, release: 10, vdelay: 20},
     p:  {level: 90, attack:  0, hold: 10, release: 10, vdelay: 20},

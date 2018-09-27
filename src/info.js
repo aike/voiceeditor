@@ -16,7 +16,7 @@ class Info extends React.Component {
 
     this.text['s_type'][0] = '子音ボタンと母音ボタンを同時に押した場合、Attack+Holdの時間だけ子音が鳴り母音に切り替わります。';
     this.text['s_type'][1] = '子音は子音ボタンを押した瞬間から発音開始します。';
-    this.text['s_type'][2] = '子音ボタンを押してから母音ボタンを押しても子音が鳴り続けます。子音ボタンを離すと母音に切り替わります。';
+    this.text['s_type'][2] = '子音ボタンを押してから母音ボタンを押すと、子音が止まり母音に切り替わります。';
     this.text['s_type'][3] = 'Vowel Delayは子音のリリース開始から母音のアタック開始までの時間差になります。';
     this.text['s_type'][4] = '';
 

@@ -255,26 +255,6 @@ class Voice
       this.init = true;
     }
     var t0 = this.ctx.currentTime;
-    //this.gain.gain.setValueAtTime(0.0000001, this.ctx.currentTime);
-
-    // this.gain.gain.setTargetAtTime(this.eg_a[0] * this.level, t0, this.eg_t[0]);
-    // for (let i = 1; i < this.eg_t.length; i++) {
-    //   this.gain.gain.setTargetAtTime(
-    //     this.eg_a[i] * this.level,
-    //     t0 + this.eg_t[i],
-    //     (this.eg_t[i] - this.eg_t[i - 1]));
-    // }
-
-    // linearRampToValueAtTime(value, endTime)
-    // exponentialRampToValueAtTime(value, endTime)
-    // setTargetAtTime(target, startTime, timeConstant)
-
-    // this.gain.gain.setValueAtTime(0.0000001, t0);
-    // this.gain.gain.setTargetAtTime(this.level, t0, this.attack);
-    // if ((this.char == 'p') || (this.char == 'k') || (this.char == 't')) {
-    //   this.gain.gain.setTargetAtTime(this.level, t0 + this.attack, this.hold);
-    //   this.gain.gain.setTargetAtTime(0.0000001, t0 + this.attack + this.hold, this.release);
-    // }
     this.gain.gain.setValueAtTime(this.zero, t0);
     this.formant_move(0);
     this.gain.gain.setTargetAtTime(this.level, t0, this.attack);
@@ -310,21 +290,6 @@ class Voice
   stop_eg()
   {
     var t0 = this.ctx.currentTime;
-    // if (this.release == null) {
-    //   this.gain.gain.setValueAtTime(0.0000001, t0);
-    //   return;
-    // }
-    // this.gain.gain.setValueAtTime(this.gain.gain.value, t0);
-    // this.gain.gain.setTargetAtTime(
-    //   0.0000001,
-    //   t0 + this.release,
-    //   this.release);
-
-    // this.gain.gain.setValueAtTime(this.gain.gain.value, t0);
-    // this.gain.gain.setTargetAtTime(
-    //   0.0000001,
-    //   t0 + this.release,
-    //   this.release);
     this.gain.gain.setValueAtTime(this.gain.gain.value, t0);
     this.gain.gain.setTargetAtTime(
       this.zero,

@@ -296,6 +296,17 @@ class Voice
       t0,
       this.release);
   }
+
+  stop_eg_with_cancel()
+  {
+    this.gain.gain.cancelScheduledValues(this.ctx.currentTime);
+    var t0 = this.ctx.currentTime;
+    this.gain.gain.setValueAtTime(this.gain.gain.value, t0);
+    this.gain.gain.setTargetAtTime(
+      this.zero,
+      t0,
+      this.release);
+  }
 }
 
 export default Voice;

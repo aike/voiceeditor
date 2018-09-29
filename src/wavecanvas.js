@@ -80,27 +80,18 @@ class WaveCanvas extends React.Component {
     this.voice.conso[c].voice.release = cp.release / 1000.0;
     this.voice.conso[c].voice.vowel_delay = cp.vdelay / 1000.0;
 
-    console.log('conso_start:' + this.props.value.conso_start);
-    console.log('vowel_start:' + this.props.value.vowel_start);
-    console.log('conso_end:' + this.props.value.conso_end);
-    console.log('vowel_end:' + this.props.value.vowel_end);
-
     this.rec.clear();
     this.rec.record();
     setTimeout(() => {
-      console.log('conso down');
       this.voice.conso[c].down();
     }, 1000 * this.props.value.conso_start);
     setTimeout(() => {
-      console.log('vowel down');
       this.voice.vowel.downFreq(vp.f1, vp.f2);
     }, 1000 * this.props.value.vowel_start);
     setTimeout(() => {
-      console.log('conso up');
       this.voice.conso[c].up();
     }, 1000 * this.props.value.conso_end);
     setTimeout(() => {
-      console.log('vowel up');
       this.voice.vowel.up();
     }, 1000 * this.props.value.vowel_end);
     setTimeout(() => {

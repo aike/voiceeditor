@@ -123,6 +123,7 @@ class App extends Component {
         </div>
         <SaveLoad value={{state:this.state, conso_params:this.conso_params}} onChange={(st, cp)=>{this.handleImport(st, cp);}} />
         <Info value={this.state.conso_type} />
+        <div id="github"><a href="https://github.com/aike/voiceeditor" target="_blank">about</a></div>
       </div>
     );
   }

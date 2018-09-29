@@ -114,3 +114,10 @@ dialog::backdrop {
   width: 100%;
   text-align: center;
 }
+
+#github {
+  position: absolute;
+  top: 768px;
+  left: 855px;
+  font-size: 11px;
+}

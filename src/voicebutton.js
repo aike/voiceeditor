@@ -69,20 +69,17 @@ class VoicePad
 	}
 
 	play() {
-		console.log('vowel play');
 		this.playing = true;
 		//this.voice.play();
 		this.voice.play_eg();
 	}
 
 	delayedPlay(delay) {
-		console.log('vowel delayed play');
 		this.playing = true;
 		this.voice.play_delayed_eg(delay);
 	}
 
 	stop() {
-		console.log('vowel stop');
 		this.playing = false;
 		this.voice.stop_eg();
 	}

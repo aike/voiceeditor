@@ -29,10 +29,6 @@ class VoiceApp {
 		this.conso[c].addVowel(this.vowel);
 	}
   }
-
-  setVowelParam(param) {
-  	this.vowel.voice.level = param.level / 100.0;
-  }
 }
 
 export default VoiceApp;

@@ -81,7 +81,7 @@ class VoicePad
 
 	stop() {
 		this.playing = false;
-		this.voice.stop_eg_with_cancel();
+		this.voice.stop_eg();
 	}
 
 	isDown() {

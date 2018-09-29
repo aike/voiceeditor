@@ -4,8 +4,11 @@ import SmallKnob from './smallknob.js';
 class ConsoPanel extends React.Component {
   state = this.props.value;
 
-  handleChange = (key, newValue) => {
-    console.log('consopanel handleChange ' + key);
+  componentWillReceiveProps(props) {
+    this.setState(props.value);
+  }
+
+  handleChange(key, newValue) {
     switch (key) {
       case "level":
         this.setState({level: newValue});

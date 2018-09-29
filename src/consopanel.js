@@ -40,7 +40,7 @@ class ConsoPanel extends React.Component {
         <div style={{position:'absolute', top:'0px', left:'150px', fontSize:'11px'}}>Consonant</div>
         <div style={{position:'absolute', top:'20px', width:'330px', height:'60px', margin:'0px'}}>
           <SmallKnob label="Level"       onChange={(val)=>{ this.handleChange("level",  val); }} value={this.props.value.level} />
-          <SmallKnob label="Attac"       onChange={(val)=>{ this.handleChange("attack", val); }} value={this.props.value.attack} />
+          <SmallKnob label="Attack"      onChange={(val)=>{ this.handleChange("attack", val); }} value={this.props.value.attack} />
           <SmallKnob label="Hold"        onChange={(val)=>{ this.handleChange("hold",   val); }} value={this.props.value.hold} />
           <SmallKnob label="Release"     onChange={(val)=>{ this.handleChange("release",val); }} value={this.props.value.release} />
           <SmallKnob label="Vowel Delay" onChange={(val)=>{ this.handleChange("vdelay" ,val); }} value={this.props.value.vdelay} max={200} />

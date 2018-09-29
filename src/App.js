@@ -8,6 +8,7 @@ import WaveCanvas from './wavecanvas';
 import ConsoDropDown from './consodropdown';
 import Info from './info';
 import SaveLoad from './saveload';
+import axios from 'axios';
 
 const TipRange = Slider.createSliderWithTooltip(Slider.Range);
 
@@ -15,20 +16,30 @@ class App extends Component {
   state = {
     conso_type: 'h',
     conso_start: 0,
-    conso_end: 0.5,
-    vowel_start: 0.2,
-    vowel_end: 0.8,
-    conso_param: {level: 80, attack:  0, hold: 40, release: 10, vdelay: 20},
-    vowel_param: {level: 80, attack: 10, release: 10, pre_f1: 600, pre_time1:50, pre_f2: 1600, pre_time2:100, f1:800, f2:1200},
+    conso_end: 0,
+    vowel_start: 0,
+    vowel_end: 0,
+    conso_param: {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0},
+    vowel_param: {
+      level: 0, attack: 0, release: 0,
+      pre_time1: 0, pre_f1: 0, f1: 0,
+      pre_time2: 0, pre_f2: 0, f2: 0}
   };
   conso_params = {
-    h:  {level: 80, attack:  0, hold: 40, release: 10, vdelay: 20},
-    s:  {level: 80, attack: 10, hold: 40, release: 10, vdelay: 20},
-    sy: {level: 80, attack: 10, hold: 40, release: 10, vdelay: 20},
-    p:  {level: 90, attack:  0, hold: 10, release: 10, vdelay: 20},
-    k:  {level: 80, attack: 10, hold: 40, release: 10, vdelay: 20},
-    t:  {level: 85, attack:  0, hold: 12, release:  6, vdelay: 20},
+    h:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0},
+    s:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0},
+    sy: {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0},
+    p:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0},
+    k:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0},
+    t:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0},
   };
+
+  componentWillMount() {
+    axios.get('./voicedata.json')
+      .then((res) => {
+        this.handleImport(res.data.state, res.data.conso_params);
+      });
+  }
 
   // Consonant Dropdown List
   handleChangeDropDown(c) {
@@ -74,7 +85,6 @@ class App extends Component {
 
   handleImport(st, cp)
   {
-    console.log('handleImport');
     this.setState(st);
     this.conso_params = cp;
   }
@@ -89,7 +99,7 @@ class App extends Component {
           <TipRange
             max={1}
             step={0.01}
-            defaultValue={[this.state.conso_start, this.state.conso_end]}
+            value={[this.state.conso_start, this.state.conso_end]}
             tipFormatter={value => `${value} sec`}
             onChange={(value) => {this.setConsoTiming(value);}}
           />
@@ -99,7 +109,7 @@ class App extends Component {
           <TipRange
             max={1}
             step={0.01}
-            defaultValue={[this.state.vowel_start, this.state.vowel_end]}
+            value={[this.state.vowel_start, this.state.vowel_end]}
             tipFormatter={value => `${value} sec`}
             onChange={(value) => {this.setVowelTiming(value);}}
           />

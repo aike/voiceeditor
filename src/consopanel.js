@@ -25,6 +25,12 @@ class ConsoPanel extends React.Component {
       case "vdelay":
         this.setState({vdelay: newValue});
         break;
+      case "bpf_freq":
+        this.setState({bpf_freq: newValue});
+        break;
+      case "bpf_q":
+        this.setState({bpf_q: newValue});
+        break;
       default:
         break;
     }
@@ -47,6 +53,10 @@ class ConsoPanel extends React.Component {
           <SmallKnob label="Hold"        onChange={(val)=>{ this.handleChange("hold",   val); }} value={this.props.value.hold} />
           <SmallKnob label="Release"     onChange={(val)=>{ this.handleChange("release",val); }} value={this.props.value.release} />
           <SmallKnob label="Vowel Delay" onChange={(val)=>{ this.handleChange("vdelay" ,val); }} value={this.props.value.vdelay} max={200} />
+        </div>
+        <div style={{position:'absolute', top:'95px', width:'200px', height:'60px', clear:'both'}}>
+          <SmallKnob label="BPF Freq (Hz)" onChange={(val)=>{ this.handleChange("bpf_freq",val); }} value={this.props.value.bpf_freq} min={100} max={8000} />
+          <SmallKnob label="BPF Q"         onChange={(val)=>{ this.handleChange("bpf_q",   val); }} value={this.props.value.bpf_q} max={10} />
         </div>
       </div>
     );

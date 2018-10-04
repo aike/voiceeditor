@@ -10,7 +10,9 @@
       "attack": 52,
       "hold": 40,
       "release": 10,
-      "vdelay": 120
+      "vdelay": 120,
+      "bpf_freq": 0,
+      "bpf_q": 0
     },
     "vowel_param": {
       "level": 80,
@@ -30,42 +32,57 @@
       "attack": 52,
       "hold": 40,
       "release": 10,
-      "vdelay": 120
+      "vdelay": 120,
+      "bpf_freq": 0,
+      "bpf_q": 0
     },
     "s": {
       "level": 80,
       "attack": 10,
       "hold": 40,
       "release": 10,
-      "vdelay": 20
+      "vdelay": 20,
+      "bpf_freq": 8000,
+      "bpf_q": 5
     },
     "sy": {
       "level": 80,
       "attack": 10,
       "hold": 40,
       "release": 10,
-      "vdelay": 20
+      "vdelay": 20,
+      "bpf_freq": 4000,
+      "bpf_q": 5
     },
     "p": {
       "level": 90,
       "attack": 0,
       "hold": 10,
       "release": 10,
-      "vdelay": 20
+      "vdelay": 20,
+      "bpf_freq": 200,
+      "bpf_q": 5
     },
     "k": {
       "level": 80,
       "attack": 10,
       "hold": 40,
       "release": 10,
-      "vdelay": 20
+      "vdelay": 20,
+      "bpf_freq": 500,
+      "bpf_q": 2
     },
     "t": {
       "level": 85,
       "attack": 0,
       "hold": 12,
       "release": 6,
-      "vdelay": 20
+      "vdelay": 20,
+      "bpf_freq": 200,
+      "bpf_q": 5
     }
+  },
+  "property": {
+    "timestamp": "20181004180918"
   }
 }

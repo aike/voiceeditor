@@ -3,7 +3,6 @@ import React from 'react';
 class SaveLoad extends React.Component {
   state = this.props.value;
 
-
   componentDidMount() {
     this.reader = new FileReader();
     this.reader.onload = (e) => {
@@ -43,25 +42,53 @@ class SaveLoad extends React.Component {
   }
 
   handleExport() {
-    var dialog = document.querySelector('#exportdialog');
+    const dialog = document.querySelector('#exportdialog');
     dialog.showModal();
 
-    var parent = document.querySelector('#exportlink');
+    const parent = document.querySelector('#exportlink');
     if (parent.firstChild != null) {
       parent.removeChild(parent.firstChild);
     }
 
-    var data = this.props.value;
-    var blob = new Blob([JSON.stringify(data, null , '  ')], { type: 'application/json' });
+    let data = this.props.value;
+    data.property.timestamp = this.getTimestamp('yyyymmddHHMMSS');
+    const blob = new Blob([JSON.stringify(data, null , '  ')], { type: 'application/json' });
 
-    var url = URL.createObjectURL(blob);
-    var div = document.createElement('div');
-    var link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    const div = document.createElement('div');
+    const link = document.createElement('a');
     link.href = url;
     link.download = 'voicedata.json';
     link.innerHTML = 'download';
     div.appendChild(link);
     parent.appendChild(div);
+  }
+
+  getTimestamp(format_string)
+  {
+    const fmt = {
+      HH: function(date) { return ('0' + date.getHours()).slice(-2); },
+      H: function(date) { return date.getHours(); },
+      MM: function(date) { return ('0' + date.getMinutes()).slice(-2); },
+      M: function(date) { return date.getMinutes(); },
+      SS: function(date) { return ('0' + date.getSeconds()).slice(-2); },
+      dd: function(date) { return ('0' + date.getDate()).slice(-2); },
+      d: function(date) { return date.getDate(); },
+      S: function(date) { return date.getSeconds(); },
+      yyyy: function(date) { return date.getFullYear() + ''; },
+      yy: function(date) { return date.getYear() + ''; },
+      t: function(date) { return date.getDate()<=3 ? ["st", "nd", "rd"][date.getDate()-1]: 'th'; },
+      w: function(date) {return ["Sun", "$on", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]; },
+      mmmm: function(date) { return ["January", "February", "$arch", "April", "$ay", "June", "July", "August", "September", "October", "November", "December"][date.getMonth()]; },
+      mmm: function(date) {return ["Jan", "Feb", "$ar", "Apr", "$ay", "Jun", "Jly", "Aug", "Spt", "Oct", "Nov", "Dec"][date.getMonth()]; },  
+      mm: function(date) { return ('0' + (date.getMonth() + 1)).slice(-2); },
+      m: function(date) { return date.getMonth() + 1; },
+      $: function(date) {return 'M';}
+    };
+    const priority = ["HH", "H", "MM", "M", "SS", "dd", "d", "S", "yyyy", "yy", "t", "w", "mmmm", "mmm", "mm", "m", "$"];
+    const now = new Date();
+    const ret = priority.reduce((res, c) => { return res.replace(c, fmt[c](now)); }, format_string);
+    return ret;
   }
 
   render() {

@@ -79,6 +79,10 @@ class WaveCanvas extends React.Component {
     this.voice.conso[c].voice.hold    = cp.hold / 1000.0;
     this.voice.conso[c].voice.release = cp.release / 1000.0;
     this.voice.conso[c].voice.vowel_delay = cp.vdelay / 1000.0;
+    if (this.voice.conso[c].voice.consoFilter != null) {
+      this.voice.conso[c].voice.consoFilter.frequency.value = cp.bpf_freq;
+      this.voice.conso[c].voice.consoFilter.Q.value = cp.bpf_q;
+    }
 
     this.rec.clear();
     this.rec.record();

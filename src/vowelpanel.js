@@ -11,7 +11,7 @@ class VowelPanel extends React.Component {
           paddingLeft:'10px',
           border:'solid 1px #2EF', borderRadius:'0.4rem'}}>
         <div style={{position:'absolute', top:'0px', left:'200px', fontSize:'11px'}}>Vowel</div>
-        <div style={{position:'absolute', top:'20px', width:'200px', height:'60px', margin:'0px'}}>
+        <div style={{position:'absolute', top:'95px', width:'200px', height:'60px', margin:'0px'}}>
           <SmallKnob label="Level"       onChange={(val)=>{this.props.onChange('level',  val);}} value={this.props.value.level} />
           <SmallKnob label="Attack"      onChange={(val)=>{this.props.onChange('attack', val);}} value={this.props.value.attack} />
           <SmallKnob label="Release"     onChange={(val)=>{this.props.onChange('release',val);}} value={this.props.value.release} />

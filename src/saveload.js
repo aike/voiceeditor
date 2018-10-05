@@ -51,7 +51,7 @@ class SaveLoad extends React.Component {
     }
 
     let data = this.props.value;
-    data.property.timestamp = this.getTimestamp('yyyymmddHHMMSS');
+    data.state.timestamp = this.getTimestamp('yyyymmddHHMMSS');
     const blob = new Blob([JSON.stringify(data, null , '  ')], { type: 'application/json' });
 
     const url = URL.createObjectURL(blob);

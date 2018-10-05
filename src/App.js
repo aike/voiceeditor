@@ -14,6 +14,7 @@ const TipRange = Slider.createSliderWithTooltip(Slider.Range);
 
 class App extends Component {
   state = {
+    timestamp: '00000000000000',
     conso_type: 'h',
     conso_start: 0,
     conso_end: 0,
@@ -33,11 +34,8 @@ class App extends Component {
     k:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
     t:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
   };
-  property = {
-    timestamp: '20181004171300'
-  };
 
-  componentWillMount() {
+  componentDidMount() {
     axios.get('./voicedata.json')
       .then((res) => {
         this.handleImport(res.data.state, res.data.conso_params);
@@ -83,10 +81,10 @@ class App extends Component {
     this.setState({vowel_param: vowel});
   }
 
-  handleImport(st, cp)
+  handleImport(stat, conso)
   {
-    this.setState(st);
-    this.conso_params = cp;
+    this.setState(stat);
+    this.conso_params = conso;
   }
 
   render() {
@@ -133,8 +131,9 @@ class App extends Component {
           <ConsoPanel value={this.state} onChange={(key, val)=>{this.handleChangeConso(key, val);}} />
           <VowelPanel value={this.state.vowel_param} onChange={(key, val)=>{this.handleChangeVowel(key, val);}} />
         </div>
-        <SaveLoad value={{state:this.state, conso_params:this.conso_params, property:this.property}} onChange={(st, cp)=>{this.handleImport(st, cp);}} />
+        <SaveLoad value={{state:this.state, conso_params:this.conso_params, property:this.property}} onChange={(st, cp, pr)=>{this.handleImport(st, cp, pr);}} />
         <Info value={this.state.conso_type} />
+        <div id="timestamp">data update: {this.state.timestamp}</div>
         <div id="github"><a href="https://github.com/aike/voiceeditor" target="_blank" rel="noopener noreferrer">about</a></div>
       </div>
     );

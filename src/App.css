@@ -109,6 +109,14 @@ dialog::backdrop {
   text-align: center;
 }
 
+#timestamp {
+  position: absolute;
+  top: 768px;
+  left: 100px;
+  font-size: 11px;
+  color: #288;
+}
+
 #github {
   position: absolute;
   top: 768px;

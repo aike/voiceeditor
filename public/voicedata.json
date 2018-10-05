@@ -8,7 +8,7 @@
     "conso_param": {
       "level": 80,
       "attack": 52,
-      "hold": 40,
+      "hold": 0,
       "release": 10,
       "vdelay": 120,
       "bpf_freq": 0,
@@ -30,7 +30,7 @@
     "h": {
       "level": 80,
       "attack": 52,
-      "hold": 40,
+      "hold": 0,
       "release": 10,
       "vdelay": 120,
       "bpf_freq": 0,

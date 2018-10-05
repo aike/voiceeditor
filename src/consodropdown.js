@@ -7,9 +7,13 @@ class ConsoDropDown extends React.Component {
         onChange={(e)=>{this.props.onChange(e.target.value);}}
         value={this.props.value}
         style={{
+          position: 'absolute',
+          top: '490px',
+          left: '125px',
+          zIndex: 1,
           width:100,
-          height:22,
-          fontSize:'16px',
+          height:26,
+          fontSize:'18px',
           marginBottom:'0px'
         }}>
         <option value="h">h</option>

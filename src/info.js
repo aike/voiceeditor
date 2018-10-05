@@ -11,7 +11,7 @@ class Info extends React.Component {
     this.text['h_type'][0] = '子音ボタンと母音ボタンを同時に押した場合、子音と母音が両方鳴り続けます。';
     this.text['h_type'][1] = '子音ボタンのみを押した場合は発音せず、子音ボタンを押したまま母音ボタンを押すと子音と母音が鳴ります。';
     this.text['h_type'][2] = '子音のみで鳴らない理由は子音ボタンだけだとF1F2が決められないためです。';
-    this.text['h_type'][3] = '子音のHoldは使用しません。';
+    this.text['h_type'][3] = '子音のHoldとBPFは使用しません。';
     this.text['h_type'][4] = 'Vowel Delayは子音のアタック開始から母音のアタック開始までの時間差になります。';
 
     this.text['s_type'][0] = '子音ボタンと母音ボタンを同時に押した場合、Attack+Holdの時間だけ子音が鳴り母音に切り替わります。';

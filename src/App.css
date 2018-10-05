@@ -11,18 +11,12 @@ body {
 
 .Logo {
   position: absolute;
-  top: 18px;
+  top: 20px;
   left: 775px;
   font-size: 26px;
   font-family: 'Share Tech', sans-serif;
 /*  padding-bottom: 0px;
   border-bottom: 1px solid #2EF; */
-}
-
-.slider-wrapper {
-  font-size: 11px;
-  width: 800px;
-  margin: 8px 0px 8px 0px;
 }
 
 .smallknob {
@@ -87,7 +81,7 @@ dialog {
   background: #444;
   color: #EEE;
 }
- 
+
 dialog::backdrop {
   /* 背景を半透明のブラックにする */
   background-color: rgba(0, 0, 0, 0.8);

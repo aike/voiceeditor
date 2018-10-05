@@ -69,23 +69,18 @@ class App extends Component {
   }
 
   // Consonant Knobs
-  handleChangeConsoValue(val) {
+  handleChangeConso(key, val) {
+    const conso = Object.assign(this.state.conso_param, {[key]: val});
     this.setState({
-      conso_param: val
+      conso_param: conso
     });
-    const c = this.state.conso_type;
-    this.conso_params[c].level    = val.level;
-    this.conso_params[c].attack   = val.attack;
-    this.conso_params[c].hold     = val.hold;
-    this.conso_params[c].release  = val.release;
-    this.conso_params[c].vdelay   = val.vdelay;
-    this.conso_params[c].bpf_freq = val.bpf_freq;
-    this.conso_params[c].bpf_q    = val.bpf_q;
+    this.conso_params[this.state.conso_type][key] = val;
   }
 
   // Vowel Knobs
-  handleChangeVowel(val) {
-    this.setState({vowel_param: val});
+  handleChangeVowel(key, val) {
+    const vowel = Object.assign(this.state.vowel_param, {[key]: val});
+    this.setState({vowel_param: vowel});
   }
 
   handleImport(st, cp)
@@ -99,7 +94,13 @@ class App extends Component {
       <div className="App">
         <div className="Logo">voice editor</div>
         <ConsoDropDown value={this.state.conso_type} onChange={(val)=>{this.handleChangeDropDown(val);}} />
-        <div className="slider-wrapper">
+        <div style={{
+            position: 'absolute',
+            top: '40px',
+            fontSize: '11px',
+            width: '800px',
+            margin: '8px 0px 8px 0px'
+          }}>
           <div>Consonant Button Push/Release</div>
           <TipRange
             max={1}
@@ -109,7 +110,13 @@ class App extends Component {
             onChange={(value) => {this.setConsoTiming(value);}}
           />
         </div>
-        <div className="slider-wrapper">
+        <div style={{
+            position: 'absolute',
+            top: '80px',
+            fontSize: '11px',
+            width: '800px',
+            margin: '8px 0px 8px 0px'
+          }}>
           <div>Vowel Button Push/Release</div>
           <TipRange
             max={1}
@@ -123,8 +130,8 @@ class App extends Component {
           <WaveCanvas value={this.state} />
         </div>
         <div className="panelarea">
-          <ConsoPanel value={this.state.conso_param} onChange={(val)=>{this.handleChangeConsoValue(val);}} />
-          <VowelPanel value={this.state.vowel_param} onChange={(val)=>{this.handleChangeVowel(val);}} />
+          <ConsoPanel value={this.state} onChange={(key, val)=>{this.handleChangeConso(key, val);}} />
+          <VowelPanel value={this.state.vowel_param} onChange={(key, val)=>{this.handleChangeVowel(key, val);}} />
         </div>
         <SaveLoad value={{state:this.state, conso_params:this.conso_params, property:this.property}} onChange={(st, cp)=>{this.handleImport(st, cp);}} />
         <Info value={this.state.conso_type} />

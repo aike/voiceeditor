@@ -39,6 +39,14 @@ class Knob extends React.Component {
   };
 
   static defaultProps = {
+    // width:48,
+    // height:48,
+    // angleArc: 270,
+    // angleOffset: -135,
+    // className: 'smallknob-body',
+    // fgColor:'#2EF',
+    // bgColor:'#668',
+
     onChangeEnd: () => {},
     min: 0,
     max: 100,
@@ -111,7 +119,7 @@ class Knob extends React.Component {
     let endAngle;
     const angle = !this.props.log
     ? ((v - this.props.min) * this.angleArc) / (this.props.max - this.props.min)
-    : Math.log(Math.pow((v / this.props.min), this.angleArc)) / Math.log(this.props.max / this.props.min);
+    : Math.log(Math.pow((v / (this.props.min + 1)), this.angleArc)) / Math.log(this.props.max / (this.props.min + 1));
     if (!this.props.clockwise) {
       startAngle = this.endAngle + 0.00001;
       endAngle = startAngle - angle - 0.00001;
@@ -140,12 +148,10 @@ class Knob extends React.Component {
   };
 
   coerceToStep = (v) => {
-    let val = !this.props.log
-    ? (~~(((v < 0) ? -0.5 : 0.5) + (v / this.props.step))) * this.props.step
-    : Math.pow(this.props.step, ~~(((Math.abs(v) < 1) ? -0.5 : 0.5) + (Math.log(v) / Math.log(this.props.step))));
+    let val = (~~(((v < 0) ? -0.5 : 0.5) + (v / this.props.step))) * this.props.step;
     val = Math.max(Math.min(val, this.props.max), this.props.min);
     if (isNaN(val)) { val = 0; }
-    return Math.round(val * 1000) / 1000;
+    return Math.round(val);
   };
 
   eventToValue = (e) => {
@@ -163,7 +169,7 @@ class Knob extends React.Component {
     }
     const val = !this.props.log
     ? (a * (this.props.max - this.props.min) / this.angleArc) + this.props.min
-    : Math.pow(this.props.max / this.props.min, a / this.angleArc) * this.props.min;
+    : Math.pow(this.props.max / (this.props.min + 1), a / this.angleArc) * (this.props.min + 1);
     return this.coerceToStep(val);
   };
 
@@ -237,21 +243,21 @@ class Knob extends React.Component {
   };
 
   handleArrowKey = (e) => {
-    if (e.keyCode === 37 || e.keyCode === 40) {
-      e.preventDefault();
-      this.props.onChange(this.coerceToStep(
-        !this.props.log
-        ? this.props.value - this.props.step
-        : this.props.value / this.props.step
-      ));
-    } else if (e.keyCode === 38 || e.keyCode === 39) {
-      e.preventDefault();
-      this.props.onChange(this.coerceToStep(
-        !this.props.log
-        ? this.props.value + this.props.step
-        : this.props.value * this.props.step
-      ));
-    }
+    // if (e.keyCode === 37 || e.keyCode === 40) {
+    //   e.preventDefault();
+    //   this.props.onChange(this.coerceToStep(
+    //     !this.props.log
+    //     ? this.props.value - this.props.step
+    //     : this.props.value / this.props.step
+    //   ));
+    // } else if (e.keyCode === 38 || e.keyCode === 39) {
+    //   e.preventDefault();
+    //   this.props.onChange(this.coerceToStep(
+    //     !this.props.log
+    //     ? this.props.value + this.props.step
+    //     : this.props.value * this.props.step
+    //   ));
+    // }
   };
 
   inputStyle = () => ({

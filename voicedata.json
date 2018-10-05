@@ -1,5 +1,6 @@
 {
   "state": {
+    "timestamp": "20181004180918",
     "conso_type": "h",
     "conso_start": 0,
     "conso_end": 0.18,
@@ -81,8 +82,5 @@
       "bpf_freq": 200,
       "bpf_q": 5
     }
-  },
-  "property": {
-    "timestamp": "20181004180918"
   }
 }

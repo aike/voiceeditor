@@ -22,6 +22,8 @@ class ConsoDropDown extends React.Component {
         <option value="p">p</option>
         <option value="k">k</option>
         <option value="t">t</option>
+        <option value="c">t</option>
+        <option value="ts">t</option>
       </select>
     );
   }

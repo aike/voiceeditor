@@ -33,6 +33,8 @@ class App extends Component {
     p:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
     k:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
     t:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
+    c:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
+    ts: {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
   };
 
   componentDidMount() {

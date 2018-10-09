@@ -1,6 +1,6 @@
 {
   "state": {
-    "timestamp": "20181004180918",
+    "timestamp": "20181009104547",
     "conso_type": "h",
     "conso_start": 0,
     "conso_end": 0.18,
@@ -76,6 +76,24 @@
     "t": {
       "level": 85,
       "attack": 0,
+      "hold": 12,
+      "release": 6,
+      "vdelay": 20,
+      "bpf_freq": 200,
+      "bpf_q": 5
+    },
+    "c": {
+      "level": 85,
+      "attack": 19,
+      "hold": 12,
+      "release": 6,
+      "vdelay": 20,
+      "bpf_freq": 1633,
+      "bpf_q": 5
+    },
+    "ts": {
+      "level": 85,
+      "attack": 26,
       "hold": 12,
       "release": 6,
       "vdelay": 20,

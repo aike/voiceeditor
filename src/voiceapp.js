@@ -20,9 +20,11 @@ class VoiceApp {
 	this.conso["h" ] = new Htype_VoiceButton("h" , new Voice(this.audioContext, "h" ,  vf, noise, fnoise, this.out));
 	this.conso["s" ] = new Stype_VoiceButton("s" , new Voice(this.audioContext, "s" ,  vf, noise, fnoise, this.out));
 	this.conso["sy"] = new Stype_VoiceButton("sy", new Voice(this.audioContext, "sy",  vf, noise, fnoise, this.out));
-	this.conso["t" ] = new Ptype_VoiceButton("t" , new Voice(this.audioContext, "t" ,  vf, noise, fnoise, this.out));
 	this.conso["k" ] = new Ptype_VoiceButton("k" , new Voice(this.audioContext, "k" ,  vf, noise, fnoise, this.out));
 	this.conso["p" ] = new Ptype_VoiceButton("p" , new Voice(this.audioContext, "p" ,  vf, noise, fnoise, this.out));
+	this.conso["t" ] = new Ptype_VoiceButton("t" , new Voice(this.audioContext, "t" ,  vf, noise, fnoise, this.out));
+	this.conso["c" ] = new Ptype_VoiceButton("c" , new Voice(this.audioContext, "c" ,  vf, noise, fnoise, this.out));
+	this.conso["ts"] = new Ptype_VoiceButton("ts", new Voice(this.audioContext, "ts",  vf, noise, fnoise, this.out));
 
 	for (var c in this.conso) {
 		this.vowel.addConso(this.conso[c]);

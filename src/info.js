@@ -38,7 +38,7 @@ class Info extends React.Component {
       case 'p':
       case 'k':
       case 't':
-      case 'c':
+      case 'cy':
       case 'ts':
         return 'p_type';
       default:

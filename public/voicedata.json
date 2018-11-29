@@ -1,6 +1,6 @@
 {
   "state": {
-    "timestamp": "20181009104547",
+    "timestamp": "20181129104547",
     "conso_type": "h",
     "conso_start": 0,
     "conso_end": 0.18,
@@ -56,39 +56,39 @@
       "bpf_q": 5
     },
     "p": {
-      "level": 90,
+      "level": 100,
       "attack": 0,
-      "hold": 10,
+      "hold": 5,
       "release": 10,
-      "vdelay": 20,
-      "bpf_freq": 200,
-      "bpf_q": 5
+      "vdelay": 50,
+      "bpf_freq": 50,
+      "bpf_q": 10
     },
     "k": {
-      "level": 80,
-      "attack": 10,
-      "hold": 40,
+      "level": 100,
+      "attack": 0,
+      "hold": 5,
       "release": 10,
-      "vdelay": 20,
-      "bpf_freq": 500,
-      "bpf_q": 2
+      "vdelay": 50,
+      "bpf_freq": 50,
+      "bpf_q": 10
     },
     "t": {
+      "level": 100,
+      "attack": 0,
+      "hold": 5,
+      "release": 10,
+      "vdelay": 50,
+      "bpf_freq": 50,
+      "bpf_q": 10
+    },
+    "cy": {
       "level": 85,
       "attack": 0,
       "hold": 12,
       "release": 6,
       "vdelay": 20,
-      "bpf_freq": 200,
-      "bpf_q": 5
-    },
-    "c": {
-      "level": 85,
-      "attack": 19,
-      "hold": 12,
-      "release": 6,
-      "vdelay": 20,
-      "bpf_freq": 1633,
+      "bpf_freq": 4000,
       "bpf_q": 5
     },
     "ts": {

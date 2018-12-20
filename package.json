@@ -6,10 +6,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "inline-worker": "^1.1.0",
-    "rc-slider": "^8.6.3",
-    "react": "^16.5.2",
+    "rc-slider": "^8.6.4",
+    "react": "^16.7.0",
     "react-canvas-knob": "^0.5.0",
-    "react-dom": "^16.5.2",
+    "react-dom": "^16.7.0",
     "react-scripts": "1.1.5",
     "recorder": "0.0.1"
   },
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "babel-plugin-react-transform": "^3.0.0",
-    "gh-pages": "^2.0.0",
+    "gh-pages": "^2.0.1",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.6.0"

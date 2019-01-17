@@ -153,7 +153,7 @@ class Voice
         this.short_conso = false;
         break;
       case "k":
-        this.osc = brown_noise;
+        this.osc = white_noise;
         this.consoFilter = ctx.createBiquadFilter();
         this.consoFilter.type = "bandpass";
         this.consoFilter.frequency.value = 500;
@@ -174,7 +174,7 @@ class Voice
         this.short_conso = true;
         break;
       case "p":
-        this.osc = brown_noise;
+        this.osc = white_noise;
         this.consoFilter = ctx.createBiquadFilter();
         this.consoFilter.type = "bandpass";
         this.consoFilter.frequency.value = 200;
@@ -195,8 +195,7 @@ class Voice
         this.short_conso = true;
         break;
       case "t":
-      case "cy":
-        this.osc = brown_noise;
+        this.osc = white_noise;
         this.consoFilter = ctx.createBiquadFilter();
         this.consoFilter.type = "bandpass";
         this.consoFilter.frequency.value = 4000;
@@ -213,8 +212,26 @@ class Voice
         this.vowel_delay = 0.01;
         this.short_conso = true;
         break;
+      case "cy":
+        this.osc = white_noise;
+        this.consoFilter = ctx.createBiquadFilter();
+        this.consoFilter.type = "bandpass";
+        this.consoFilter.frequency.value = 4000;
+        this.consoFilter.Q.value = 5;
+        this.gain = ctx.createGain();
+        this.gain.gain.value = this.zero;
+        this.osc.connect(this.consoFilter);
+        this.consoFilter.connect(this.gain);
+        this.gain.connect(dest);
+        this.level = 0.1;
+        this.attack  = 0.0;
+        this.hold    = -1;
+        this.release = 0.01;
+        this.vowel_delay = 0.01;
+        this.short_conso = false;
+        break;
       case "ts":
-        this.osc = brown_noise;
+        this.osc = white_noise;
         this.consoFilter = ctx.createBiquadFilter();
         this.consoFilter.type = "bandpass";
         this.consoFilter.frequency.value = 8000;

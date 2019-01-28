@@ -24,7 +24,7 @@ class VoiceApp {
 	this.conso["p" ] = new Ptype_VoiceButton("p" , new Voice(this.audioContext, "p" ,  vf, wnoise, bnoise, this.out));
 	this.conso["t" ] = new Ptype_VoiceButton("t" , new Voice(this.audioContext, "t" ,  vf, wnoise, bnoise, this.out));
 	this.conso["cy"] = new Stype_VoiceButton("cy", new Voice(this.audioContext, "cy",  vf, wnoise, bnoise, this.out));
-	this.conso["ts"] = new Ptype_VoiceButton("ts", new Voice(this.audioContext, "ts",  vf, wnoise, bnoise, this.out));
+	this.conso["ts"] = new Stype_VoiceButton("ts", new Voice(this.audioContext, "ts",  vf, wnoise, bnoise, this.out));
 
 	for (var c in this.conso) {
 		this.vowel.addConso(this.conso[c]);

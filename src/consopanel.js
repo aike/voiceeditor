@@ -19,10 +19,10 @@ class ConsoPanel extends React.Component {
           <SmallKnob label="Vowel Delay" onChange={(val)=>{this.props.onChange('vdelay',  val);}} value={this.props.value.conso_param.vdelay} max={200} />
         </div>
         <div style={{position:'absolute', top:'20px', left:'200px', width:'200px', height:'60px', clear:'both'}}>
-          <SmallKnob label="BPF Freq (Hz)" onChange={(val)=>{this.props.onChange('bpf_freq', val);}} value={this.props.value.conso_param.bpf_freq} max={8000} log={true}
-                                           readOnly={this.props.value.conso_type === 'h' ? true : false} />
-          <SmallKnob label="BPF Q"         onChange={(val)=>{this.props.onChange('bpf_q',    val);}} value={this.props.value.conso_param.bpf_q} max={20}
-                                           readOnly={this.props.value.conso_type === 'h' ? true : false} />
+          <SmallKnob label="Filter Freq (Hz)" onChange={(val)=>{this.props.onChange('filter_freq', val);}} value={this.props.value.conso_param.filter_freq} max={8000} log={true}
+                                              readOnly={this.props.value.conso_type === 'h' ? true : false} />
+          <SmallKnob label="Filter Q"         onChange={(val)=>{this.props.onChange('filter_q',    val);}} value={this.props.value.conso_param.filter_q} max={20}
+                                              readOnly={this.props.value.conso_type === 'h' ? true : false} />
         </div>
       </div>
     );

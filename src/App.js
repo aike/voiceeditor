@@ -20,21 +20,21 @@ class App extends Component {
     conso_end: 0,
     vowel_start: 0,
     vowel_end: 0,
-    conso_param: {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
+    conso_param: {level: 0, boost: 1, attack: 0, hold: 0, release: 0, vdelay: 0, filter_type: 'bandpass', filter_freq: 0, filter_q: 0},
     vowel_param: {
       level: 0, attack: 0, release: 0,
       pre_time1: 0, pre_f1: 0, f1: 0,
       pre_time2: 0, pre_f2: 0, f2: 0}
   };
   conso_params = {
-    h:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
-    s:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
-    sy: {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
-    p:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
-    k:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
-    t:  {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
-    cy: {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
-    ts: {level: 0, attack: 0, hold: 0, release: 0, vdelay: 0, bpf_freq: 0, bpf_q: 0},
+    h:  {level: 0, boost: 1, attack: 0, hold: 0, release: 0, vdelay: 0, filter_type: 'bandpass', filter_freq: 0, filter_q: 0},
+    s:  {level: 0, boost: 1, attack: 0, hold: 0, release: 0, vdelay: 0, filter_type: 'bandpass', filter_freq: 0, filter_q: 0},
+    sy: {level: 0, boost: 1, attack: 0, hold: 0, release: 0, vdelay: 0, filter_type: 'bandpass', filter_freq: 0, filter_q: 0},
+    p:  {level: 0, boost: 1, attack: 0, hold: 0, release: 0, vdelay: 0, filter_type: 'bandpass', filter_freq: 0, filter_q: 0},
+    k:  {level: 0, boost: 1, attack: 0, hold: 0, release: 0, vdelay: 0, filter_type: 'bandpass', filter_freq: 0, filter_q: 0},
+    t:  {level: 0, boost: 1, attack: 0, hold: 0, release: 0, vdelay: 0, filter_type: 'bandpass', filter_freq: 0, filter_q: 0},
+    cy: {level: 0, boost: 1, attack: 0, hold: 0, release: 0, vdelay: 0, filter_type: 'bandpass', filter_freq: 0, filter_q: 0},
+    ts: {level: 0, boost: 1, attack: 0, hold: 0, release: 0, vdelay: 0, filter_type: 'bandpass', filter_freq: 0, filter_q: 0},
   };
 
   componentDidMount() {

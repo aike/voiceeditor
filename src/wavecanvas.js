@@ -75,11 +75,12 @@ class WaveCanvas extends React.Component {
     const cp = this.props.value.conso_param;
     const c = this.props.value.conso_type;
     this.voice.conso[c].voice.level   = cp.level / 100.0;
-    this.voice.conso[c].voice.boost   = cp.boost;
     this.voice.conso[c].voice.attack  = cp.attack / 1000.0;
     this.voice.conso[c].voice.hold    = cp.hold / 1000.0;
     this.voice.conso[c].voice.release = cp.release / 1000.0;
     this.voice.conso[c].voice.vowel_delay = cp.vdelay / 1000.0;
+
+    this.voice.conso[c].voice.boost.gain.value = cp.boost;
     if (this.voice.conso[c].voice.consoFilter != null) {
       this.voice.conso[c].voice.consoFilter.type = cp.filter_type;
       this.voice.conso[c].voice.consoFilter.frequency.value = cp.filter_freq;

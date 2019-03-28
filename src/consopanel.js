@@ -15,6 +15,9 @@ class ConsoPanel extends React.Component {
           <SmallKnob label="Attack"      onChange={(val)=>{this.props.onChange('attack',  val);}} value={this.props.value.conso_param.attack} />
           <SmallKnob label="Hold"        onChange={(val)=>{this.props.onChange('hold',    val);}} value={this.props.value.conso_param.hold}
                                          readOnly={this.props.value.conso_type === 'h' ? true : false} />
+          <SmallKnob label="Decay"     onChange={(val)=>{this.props.onChange('decay', val);}} value={this.props.value.conso_param.decay} />
+          <SmallKnob label="S.Lev"     onChange={(val)=>{this.props.onChange('sustainLevel', val);}} value={this.props.value.conso_param.sustainLevel} />
+          <SmallKnob label="S.Time"     onChange={(val)=>{this.props.onChange('sustainTime', val);}} value={this.props.value.conso_param.sustainTime} />
           <SmallKnob label="Release"     onChange={(val)=>{this.props.onChange('release', val);}} value={this.props.value.conso_param.release} />
           <SmallKnob label="Vowel Delay" onChange={(val)=>{this.props.onChange('vdelay',  val);}} value={this.props.value.conso_param.vdelay} max={200} />
         </div>

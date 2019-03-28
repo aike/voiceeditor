@@ -134,7 +134,7 @@ class App extends Component {
           <VowelPanel value={this.state.vowel_param} onChange={(key, val)=>{this.handleChangeVowel(key, val);}} />
         </div>
         <SaveLoad value={{state:this.state, conso_params:this.conso_params, property:this.property}} onChange={(st, cp, pr)=>{this.handleImport(st, cp, pr);}} />
-        <Info value={this.state.conso_type} />
+        {/* <Info value={this.state.conso_type} /> */}
         <div id="timestamp">data update: {this.state.timestamp}</div>
         <div id="github"><a href="https://github.com/aike/voiceeditor" target="_blank" rel="noopener noreferrer">about</a></div>
       </div>

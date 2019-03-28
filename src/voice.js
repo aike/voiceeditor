@@ -51,13 +51,13 @@ class VowelFilter
     this.F1 = ctx.createBiquadFilter();
     this.F1.type = "bandpass";
     this.F1.frequency.value = 500;
-    this.F1.Q.value = 10;
+    this.F1.Q.value = 40;
     //this.F1.Q.value = this.F1.frequency.value * 0.02;
 
     this.F2 = ctx.createBiquadFilter();
     this.F2.type = "bandpass";
     this.F2.frequency.value = 1500;
-    this.F2.Q.value = 10;
+    this.F2.Q.value = 40;
     //this.F2.Q.value = this.F2.frequency.value * 0.02;
 
     this.F1.connect(dest);
@@ -74,6 +74,13 @@ class Voice
     this.ctx = ctx;
     this.init = false;
     this.filter = null;
+
+    this.attack = 0;
+    this.hold = 0;
+    this.decay = 0;
+    this.sustainLevel = 0;
+    this.sustainTime = 0;
+    this.release = 0;
 
     var f0 = 125;
 
@@ -121,18 +128,37 @@ class Voice
         this.short_conso = false;
         break;
       case "k":
-      case "p":
-      case "t":
         this.osc = white_noise;
-        this.consoFilter = ctx.createBiquadFilter();
-        this.consoFilter.type = "bandpass";
         this.boost = ctx.createGain();
         this.gain = ctx.createGain();
         this.gain.gain.value = this.zero;
-        this.osc.connect(this.consoFilter);
-        this.consoFilter.connect(this.boost);
+        this.filter = vowelFilter;
+        this.F3 = ctx.createBiquadFilter();
+        this.F3.type = "bandpass";
+        this.F3.frequency.value = 4000;
+        this.F3.Q.value = 40;
+        this.F3Gain = ctx.createGain();
+        this.F3Gain.gain.value = 0.5;
+        this.osc.connect(this.boost);
         this.boost.connect(this.gain);
-        this.gain.connect(dest);
+        this.gain.connect(vowelFilter.F1);
+        this.gain.connect(vowelFilter.F2);
+        this.gain.connect(this.F3);
+        this.F3.connect(this.F3Gain);
+        this.F3Gain.connect(dest);
+        this.short_conso = true;
+        break;
+      case "p":
+      case "t":
+        this.osc = white_noise;
+        this.boost = ctx.createGain();
+        this.gain = ctx.createGain();
+        this.gain.gain.value = this.zero;
+        this.filter = vowelFilter;
+        this.osc.connect(this.boost);
+        this.boost.connect(this.gain);
+        this.gain.connect(vowelFilter.F1);
+        this.gain.connect(vowelFilter.F2);
         this.short_conso = true;
         break;
       default:
@@ -146,15 +172,11 @@ class Voice
     const t0 = this.ctx.currentTime + offset;
     if ((this.pre_time1 != null) && (this.pre_time1 > 0)) {
       this.filter.F1.frequency.setValueAtTime(this.pre_f1, t0);
-      //this.filter.F1.Q.setValueAtTime(this.pre_f1 * 0.02, t0);
       this.filter.F1.frequency.setTargetAtTime(this.f1, t0, this.pre_time1);
-      //this.filter.F1.Q.setTargetAtTime(this.f1 * 0.02, t0, this.pre_time1);
     }
     if ((this.pre_time2 != null) && (this.pre_time2 > 0)) {
       this.filter.F2.frequency.setValueAtTime(this.pre_f2, t0);
-      //this.filter.F2.Q.setValueAtTime(this.pre_f2 * 0.02, t0);
       this.filter.F2.frequency.setTargetAtTime(this.f2, t0, this.pre_time2);
-      //this.filter.F2.Q.setTargetAtTime(this.f2 * 0.02, t0, this.pre_time2);
     }
   }
 
@@ -179,7 +201,8 @@ class Voice
     this.gain.gain.setTargetAtTime(this.level, t0, this.attack);
     if (this.short_conso) {
       this.gain.gain.setTargetAtTime(this.level, t0 + this.attack, this.hold);
-      this.gain.gain.setTargetAtTime(this.zero, t0 + this.attack + this.hold, this.release);
+      this.gain.gain.setTargetAtTime(this.sustainLevel, t0 + this.attack + this.hold, this.decay);
+      this.gain.gain.setTargetAtTime(this.zero, t0 + this.attack + this.hold + this.decay + this.sustainTime, this.release);
     }
   }
 
@@ -196,7 +219,8 @@ class Voice
     this.gain.gain.setTargetAtTime(this.level, t0 + delay, this.attack);
     if (this.short_conso) {
       this.gain.gain.setTargetAtTime(this.level, t0 + delay + this.attack, this.hold);
-      this.gain.gain.setTargetAtTime(this.zero, t0 + delay + this.attack + this.hold, this.release);
+      this.gain.gain.setTargetAtTime(this.sustainLevel, t0 + delay + this.attack + this.hold, this.decay);
+      this.gain.gain.setTargetAtTime(this.zero, t0 + delay + this.attack + this.hold + this.decay + this.sustainTime, this.release);
     }
   }
 

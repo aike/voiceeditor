@@ -5,7 +5,7 @@ class Noise
     this.buf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
     var data = this.buf.getChannelData(0);
     for (var i = 0; i < this.buf.length; i++) {
-      data[i] = Math.random() * 2 - 1;
+      data[i] = (Math.random() > 0.5) ? 1.0 : -1.0;
     }
     this.osc = ctx.createBufferSource();
     this.osc.buffer = this.buf;
@@ -138,7 +138,7 @@ class Voice
         this.F3.frequency.value = 4000;
         this.F3.Q.value = 2;
         this.F3Gain = ctx.createGain();
-        this.F3Gain.gain.value = 0.1;
+        this.F3Gain.gain.value = 0.4;
         this.osc.connect(this.boost);
         this.boost.connect(this.gain);
         this.gain.connect(vowelFilter.F1);

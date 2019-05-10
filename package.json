@@ -6,10 +6,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "inline-worker": "^1.1.0",
-    "rc-slider": "^8.6.4",
-    "react": "^16.7.0",
+    "rc-slider": "^8.6.9",
+    "react": "^16.8.6",
     "react-canvas-knob": "^0.5.0",
-    "react-dom": "^16.7.0",
+    "react-dom": "^16.8.6",
     "react-scripts": "1.1.5",
     "recorder": "0.0.1"
   },
